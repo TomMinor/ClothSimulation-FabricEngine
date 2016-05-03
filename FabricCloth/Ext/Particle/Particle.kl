@@ -1,0 +1,41 @@
+require Math;
+require Geometry;
+
+const Boolean GPU = false;
+
+// Inherit from points 
+object ParticleSystem : Points
+{
+	//Per Vertex attributes
+	ScalarAttribute m_attribMass;
+	Vec3Attribute m_attribPrevPos;
+	Vec3Attribute m_attribAcceleration;
+	Vec3Attribute m_attribAccumulatedNormal;
+};
+
+function ParticleSystem.ctor!()
+{
+    this.setupAttribs();
+}
+
+function ParticleSystem.test()
+{
+	report("PARTICLE BUTT");
+}
+
+function ParticleSystem.setupAttribs!()
+{
+	Ref<GeometryAttributes> attributes = this.getAttributes();
+	// if (GPU){
+    // 	attributes.convertToSVM();
+    // }
+
+    this.m_attribMass 				= attributes.getOrCreateScalarAttribute("mass");
+    this.m_attribPrevPos 			= attributes.getOrCreateVec3Attribute("prevpos");
+    this.m_attribAcceleration 		= attributes.getOrCreateVec3Attribute("accel");
+    this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
+}
+
+operator entry() { 
+    report("arse");
+}
