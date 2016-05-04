@@ -20,7 +20,7 @@ function ParticleSystem.ctor!()
 
 function ParticleSystem.test()
 {
-	report("PARTICLE BUTT");
+	report("PARTICLE SYSTEM");
 }
 
 function ParticleSystem.setupAttribs!()
