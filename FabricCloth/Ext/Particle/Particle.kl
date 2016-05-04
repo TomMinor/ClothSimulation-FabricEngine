@@ -1,41 +1,87 @@
 require Math;
 require Geometry;
+require ClothSimulation;
 
 const Boolean GPU = false;
 
-// Inherit from points 
-object ParticleSystem : Points
+// Forward declare this as it lives elsewhere in the extension
+// http://docs.fabric-engine.com/FabricEngine/1.13.0/HTML/KLProgrammingGuide/types.html
+object SpringConstraint;
+
+// Should I use PEX for everything D:?
+operator addForce<<<index>>>(
+	io Ref<Cloth> _cloth, 
+	io Ref<GeometryAttributes> _attributes,
+	in Vec3 _force
+	)
 {
+	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+	vel.values[index] += _force / mass.values[index];
+}
+
+operator simulateCloth<<<index>>>(
+	io Ref<Cloth> _cloth, 
+	io Ref<GeometryAttributes> _attributes,
+	in Vec3 _force
+	)
+{
+	Vec3Attribute pos = _attributes.getAttribute("positions", Vec3Attribute);
+	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+	vel.values[index] += _force / mass.values[index];
+}
+
+// Inherit from points 
+object Cloth : PolygonMesh
+{
+	Boolean m_isActive;
+	Vec3 m_gravity;
+	Float32 m_fps;
+
+	SpringConstraint constraints[];
+
 	//Per Vertex attributes
+	IntegerAttribute m_attribMovable;
 	ScalarAttribute m_attribMass;
 	Vec3Attribute m_attribPrevPos;
 	Vec3Attribute m_attribAcceleration;
-	Vec3Attribute m_attribAccumulatedNormal;
+	// Vec3Attribute m_attribAccumulatedNormal;
 };
 
-function ParticleSystem.ctor!()
+function Cloth.ctor!()
 {
     this.setupAttribs();
+
+
 }
 
-function ParticleSystem.test()
+function Cloth.addForce!(in Vec3 _force)
 {
-	report("PARTICLE SYSTEM");
+	addForce<<<this.polygonPointsCount()>>>(this, this.getAttributes(), _force);
 }
 
-function ParticleSystem.setupAttribs!()
+function Cloth.setupAttribs!()
 {
 	Ref<GeometryAttributes> attributes = this.getAttributes();
 	// if (GPU){
     // 	attributes.convertToSVM();
     // }
 
+    this.m_attribMovable			= attributes.getOrCreateIntegerAttribute("movable");
     this.m_attribMass 				= attributes.getOrCreateScalarAttribute("mass");
     this.m_attribPrevPos 			= attributes.getOrCreateVec3Attribute("prevpos");
     this.m_attribAcceleration 		= attributes.getOrCreateVec3Attribute("accel");
-    this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
+    // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
 }
 
-operator entry() { 
-    report("arse");
+function Cloth.step!()
+{   
+	Vec3 a = Vec3(1,1,1);
+    Vec3 b = Vec3(1,0,1);
+    
+	for(Index i = 0; i < constraints.size(); i++)
+	{
+		this.constraints[i].solve(a, b);
+	}
 }
