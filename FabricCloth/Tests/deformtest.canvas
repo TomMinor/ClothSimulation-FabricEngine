@@ -214,7 +214,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":527.0,\"y\":87.0}"
+        "uiGraphPos" : "{\"x\":535.0,\"y\":114.0}"
         },
       "name" : "Clone_1",
       "ports" : [
@@ -288,7 +288,9 @@
             }
           ],
         "extDeps" : {},
-        "code" : "operator deformer<<<index>>>(io Vec3 _points[], in Float64 _a, in Float64 _b)
+        "code" : "//http://forums.fabricengine.com/discussion/comment/1968/#Comment_1968
+
+operator deformer<<<index>>>(io Vec3 _points[], in Float64 _a, in Float64 _b)
 {
   Vec3 tmp = _points[index];
   _points[index] += Vec3(0, sin(tmp.x * _a) * _b, 0);
