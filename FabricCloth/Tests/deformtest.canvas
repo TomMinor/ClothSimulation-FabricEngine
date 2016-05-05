@@ -1,24 +1,25 @@
 {
   "objectType" : "Graph",
   "metadata" : {
-    "timeline_timerFps" : "1000",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.9697739481925964,\n    \"y\" : 0.1213491708040237,\n    \"z\" : -0.2116907089948654,\n    \"t\" : -3.537297964096069\n    },\n  \"row1\" : {\n    \"x\" : -5.215407128389415e-08,\n    \"y\" : 0.8675631284713745,\n    \"z\" : 0.4973225891590118,\n    \"t\" : 8.30996036529541\n    },\n  \"row2\" : {\n    \"x\" : 0.2440055310726166,\n    \"y\" : -0.4822891652584076,\n    \"z\" : 0.8413422703742981,\n    \"t\" : 14.05849456787109\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "timeline_timerFps" : "25",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.2331081181764603,\n    \"y\" : 0.2127848118543625,\n    \"z\" : -0.949032187461853,\n    \"t\" : -15.26412963867188\n    },\n  \"row1\" : {\n    \"x\" : -1.013401060845354e-06,\n    \"y\" : 0.9757112264633179,\n    \"z\" : 0.21885646879673,\n    \"t\" : 7.299574375152588\n    },\n  \"row2\" : {\n    \"x\" : 0.972574770450592,\n    \"y\" : 0.05100158974528313,\n    \"z\" : -0.2274652421474457,\n    \"t\" : -3.938707590103149\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "timeline_loopMode" : "1",
-    "timeline_simMode" : "0",
-    "camera_focalDistance" : "16.70950698852539",
+    "uiGraphZoom" : "{\n  \"value\" : 0.9780531525611877\n  }",
+    "timeline_simMode" : "1",
+    "camera_focalDistance" : "23.68310165405273",
     "timeline_current" : "1",
-    "timeline_end" : "50"
+    "timeline_end" : "100",
+    "uiGraphPan" : "{\n  \"x\" : -87.09464421147482,\n  \"y\" : 471.9347560595586\n  }"
     },
   "title" : "",
   "ports" : [
     {
       "objectType" : "Port",
-      "metadata" : {},
       "nodePortType" : "Out",
-      "name" : "in",
+      "name" : "timeline",
       "execPortType" : "In",
-      "typeSpec" : "Float64"
+      "typeSpec" : "Float32"
       },
     {
       "objectType" : "Port",
@@ -33,6 +34,13 @@
       "name" : "this",
       "execPortType" : "Out",
       "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "value",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
       }
     ],
   "extDeps" : {},
@@ -40,7 +48,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":38.0,\"y\":82.0}"
+        "uiGraphPos" : "{\"x\":31.11738204956055,\"y\":-455.2424926757812}"
         },
       "name" : "GetPlane_1",
       "ports" : [
@@ -63,7 +71,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Size" : 256
+            "Size" : 180
             },
           "name" : "lengthSections"
           },
@@ -71,7 +79,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Size" : 256
+            "Size" : 180
             },
           "name" : "widthSections"
           }
@@ -82,7 +90,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":615.0,\"y\":34.0}"
+        "uiGraphPos" : "{\"x\":1930.203369140625,\"y\":-478.3999328613281}"
         },
       "name" : "EmptyDrawingHandle_1",
       "ports" : [
@@ -98,7 +106,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1462.0,\"y\":-12.0}"
+        "uiGraphPos" : "{\"x\":2198.861328125,\"y\":-487.5017395019531}"
         },
       "name" : "DrawPolygonMesh_1",
       "ports" : [
@@ -172,7 +180,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":505.0,\"y\":194.0}"
+        "uiGraphPos" : "{\"x\":876.3790893554688,\"y\":219.2342376708984}"
         },
       "name" : "GetAllPointPositions_1",
       "ports" : [
@@ -193,7 +201,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":959.0,\"y\":138.0}"
+        "uiGraphPos" : "{\"x\":1353.876586914062,\"y\":138.3138275146484}"
         },
       "name" : "SetAllPointPositions_1",
       "ports" : [
@@ -214,7 +222,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":535.0,\"y\":114.0}"
+        "uiGraphPos" : "{\"x\":973.8563232421875,\"y\":-343.9581604003906}"
         },
       "name" : "Clone_1",
       "ports" : [
@@ -235,7 +243,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":741.0,\"y\":204.0}"
+        "uiGraphPos" : "{\"x\":1123.7548828125,\"y\":243.5177612304688}"
         },
       "name" : "MeshDeform",
       "ports" : [
@@ -248,7 +256,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Float64" : -1.899999976158142
+            "Float64" : 1.299999952316284
             },
           "name" : "a"
           },
@@ -259,6 +267,11 @@
             "Float64" : 0.8999999761581421
             },
           "name" : "b"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "c"
           }
         ],
       "definition" : {
@@ -285,20 +298,27 @@
             "name" : "b",
             "execPortType" : "In",
             "typeSpec" : "Float64"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "c",
+            "execPortType" : "In",
+            "typeSpec" : "Float32"
             }
           ],
         "extDeps" : {},
         "code" : "//http://forums.fabricengine.com/discussion/comment/1968/#Comment_1968
 
-operator deformer<<<index>>>(io Vec3 _points[], in Float64 _a, in Float64 _b)
+operator deformer<<<index>>>(io Vec3 _points[], in Float64 _a, in Float64 _b, in Float32 _c)
 {
   Vec3 tmp = _points[index];
-  _points[index] += Vec3(0, sin(tmp.x * _a) * _b, 0);
+  _points[index] += Vec3(0, sin(tmp.x * _a + _c) * _b, 0);
 }
 
 dfgEntry
 {
-  deformer<<<points.size()>>>(points, a, b);  
+  deformer<<<points.size()>>>(points, a, b, c);
 }
 "
         }
@@ -306,7 +326,7 @@ dfgEntry
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":315.0,\"y\":96.0}"
+        "uiGraphPos" : "{\"x\":297.0258483886719,\"y\":-388.8825073242188}"
         },
       "name" : "Transform_1",
       "ports" : [
@@ -332,7 +352,7 @@ dfgEntry
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":140.0,\"y\":231.0}",
+        "uiGraphPos" : "{\"x\":63.21012878417969,\"y\":-295.2611083984375}",
         "uiCollapsedState" : "1"
         },
       "name" : "XfoFromSRT_1",
@@ -397,7 +417,7 @@ dfgEntry
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1192.0,\"y\":138.0}"
+        "uiGraphPos" : "{\"x\":1602.69970703125,\"y\":137.5744781494141}"
         },
       "name" : "RecomputePointNormals_1",
       "ports" : [
@@ -414,9 +434,242 @@ dfgEntry
         ],
       "executable" : "Fabric.Exts.Geometry.PolygonMesh.RecomputePointNormals",
       "presetGUID" : "82B0904C5BAB58BDA9ED038FB18E0629"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1235.466552734375,\"y\":-321.6739807128906}"
+        },
+      "name" : "AttributeTest",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "geom"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Func",
+        "title" : "AttributeTest",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "IO",
+            "name" : "geom",
+            "execPortType" : "IO",
+            "typeSpec" : "PolygonMesh"
+            }
+          ],
+        "extDeps" : {
+          "ClothSimulation" : "*"
+          },
+        "code" : "operator deformer<<<index>>>(io Vec3 _points[], in Float64 _v)
+{
+  Vec3 tmp = _points[index];
+  _points[index] += Vec3(cos(tmp.y) * 0.25, (cos(tmp.z) * 0.1), 0);
+}
+
+
+dfgEntry
+{
+  SpringConstraint tmp[];
+
+  // Get the attributes container from the geometry
+  Ref<GeometryAttributes> attributes = geom.getAttributes();
+  report('Number of attributes: ' + attributes.attributeCount());
+  report('Number of elements: ' + attributes.size());
+
+  // Iterate over the attributes
+  GeometryAttributesIterator iter = attributes.getAttributesIterator();
+  Ref<GeometryAttribute> attribute = null;
+  while( attribute = iter.getNext() )
+  report( 'Attribute ' + attribute.getName() + ' of type ' + attribute.type() );
+  
+  attributes.getOrCreateScalarAttribute(\"mass\");
+  
+  Vec3 points[] = geom.getAllPointPositions();
+  deformer<<<points.size()>>>(points, 0.8);
+  geom.setAllPointPositions(points);
+}
+"
+        }
+      },
+    {
+      "objectType" : "Var",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":785.2415771484375,\"y\":-468.5561828613281}"
+        },
+      "name" : "geom",
+      "ports" : [
+        {
+          "objectType" : "VarPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "dataType" : "PolygonMesh"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":771.7786254882812,\"y\":-409.2385864257812}"
+        },
+      "name" : "If_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "cond"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_true"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_false"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "Fabric.Core.Control.If",
+      "presetGUID" : "3182A478A21643455D549E483D35F831"
+      },
+    {
+      "objectType" : "Get",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":559.5950317382812,\"y\":-322.4472045898438}"
+        },
+      "name" : "get",
+      "ports" : [
+        {
+          "objectType" : "GetPort",
+          "nodePortType" : "Out",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "geom"
+      },
+    {
+      "objectType" : "Set",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1726.41064453125,\"y\":-327.0966796875}"
+        },
+      "name" : "set",
+      "ports" : [
+        {
+          "objectType" : "SetPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "geom"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiComment" : "Reset if time is on first frame",
+        "uiGraphPos" : "{\"x\":556.0169067382812,\"y\":-469.188720703125}",
+        "uiCommentExpanded" : "true"
+        },
+      "name" : "Le_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "lhs"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Float32" : 1
+            },
+          "name" : "rhs"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "Fabric.Core.Logic.Le",
+      "presetGUID" : "29580C848A777A42608B45D8DF02D37C"
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Input Geometry",
+        "uiGraphPos" : "{\"x\":12.76713562011719,\"y\":-511.0693664550781}",
+        "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
+        "uiTextColor" : "{\n  \"r\" : 255,\n  \"g\" : 255,\n  \"b\" : 255\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 182,\n  \"g\" : 85,\n  \"b\" : 0\n  }",
+        "uiGraphSize" : "{\"w\":455.9475402832031,\"h\":310.8149719238281}"
+        },
+      "name" : "backDrop",
+      "ports" : []
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Simulation Reset",
+        "uiGraphPos" : "{\"x\":539.0704345703125,\"y\":-517.7426147460938}",
+        "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
+        "uiTextColor" : "{\n  \"r\" : 255,\n  \"g\" : 255,\n  \"b\" : 255\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 80,\n  \"g\" : 98,\n  \"b\" : 110\n  }",
+        "uiGraphSize" : "{\"w\":385.411376953125,\"h\":248.7748870849609}"
+        },
+      "name" : "backDrop_2",
+      "ports" : []
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Drawing",
+        "uiGraphPos" : "{\"x\":1898.443969726562,\"y\":-542.2647705078125}",
+        "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
+        "uiTextColor" : "{\n  \"r\" : 255,\n  \"g\" : 255,\n  \"b\" : 255\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 0,\n  \"g\" : 170,\n  \"b\" : 127\n  }",
+        "uiGraphSize" : "{\"w\":516.9625244140625,\"h\":371.4239807128906}"
+        },
+      "name" : "backDrop_3",
+      "ports" : []
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1451.6455078125,\"y\":-321.4961547851562}"
+        },
+      "name" : "RecomputePointNormals_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "this"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : -7.599999904632568
+            },
+          "name" : "hardAngleRadians"
+          }
+        ],
+      "executable" : "Fabric.Exts.Geometry.PolygonMesh.RecomputePointNormals",
+      "presetGUID" : "82B0904C5BAB58BDA9ED038FB18E0629"
       }
     ],
   "connections" : {
+    "timeline" : [
+      "MeshDeform.c",
+      "Le_1.lhs"
+      ],
     "GetPlane_1.value" : [
       "Transform_1.mesh"
       ],
@@ -433,20 +686,36 @@ dfgEntry
       "RecomputePointNormals_1.this"
       ],
     "Clone_1.clonedValue" : [
-      "SetAllPointPositions_1.this"
+      "SetAllPointPositions_1.this",
+      "AttributeTest.geom"
       ],
     "MeshDeform.points" : [
       "SetAllPointPositions_1.positions"
       ],
     "Transform_1.result" : [
-      "Clone_1.value",
-      "GetAllPointPositions_1.this"
+      "GetAllPointPositions_1.this",
+      "If_1.if_true"
       ],
     "XfoFromSRT_1.result" : [
       "Transform_1.xfo"
       ],
-    "RecomputePointNormals_1.this" : [
+    "AttributeTest.geom" : [
+      "RecomputePointNormals_2.this"
+      ],
+    "If_1.result" : [
+      "Clone_1.value"
+      ],
+    "get.value" : [
+      "If_1.if_false"
+      ],
+    "set.value" : [
       "DrawPolygonMesh_1.mesh"
+      ],
+    "Le_1.result" : [
+      "If_1.cond"
+      ],
+    "RecomputePointNormals_2.this" : [
+      "set.value"
       ]
     },
   "requiredPresets" : {
@@ -1823,11 +2092,86 @@ dfgEntry {
   this.recomputePointNormals(hardAngleRadians);
 }
 "
+      },
+    "Fabric.Core.Control.If" : {
+      "objectType" : "Func",
+      "title" : "If",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "cond",
+          "execPortType" : "In",
+          "typeSpec" : "Boolean"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_true",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_false",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "3182A478A21643455D549E483D35F831",
+      "code" : "
+dfgEntry {
+	result = cond ? if_true : if_false;
+}
+"
+      },
+    "Fabric.Core.Logic.Le" : {
+      "objectType" : "Func",
+      "title" : "Le <=",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "lhs",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "rhs",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Boolean"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "29580C848A777A42608B45D8DF02D37C",
+      "code" : "
+dfgEntry {
+	result = lhs <= rhs;
+}
+"
       }
     },
   "args" : [
     {
-      "type" : "Float64",
+      "type" : "Float32",
       "value" : null
       },
     {
@@ -1838,6 +2182,10 @@ dfgEntry {
       "type" : "DrawingHandle",
       "value" : null,
       "ext" : "InlineDrawing"
+      },
+    {
+      "type" : "Boolean",
+      "value" : null
       }
     ]
   }

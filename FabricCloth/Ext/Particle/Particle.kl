@@ -1,23 +1,20 @@
 require Math;
 require Geometry;
-require ClothSimulation;
 
-const Boolean GPU = false;
+interface BaseConstraint;
 
 // Forward declare this as it lives elsewhere in the extension
-// http://docs.fabric-engine.com/FabricEngine/1.13.0/HTML/KLProgrammingGuide/types.html
+// http://docs.fabric-engine.com/FabricEngine/1.13.0/HTML/KLProgrammingGuide/types.html#forward-declaration-of-objects-and-interfaces
 object SpringConstraint;
 
-// Should I use PEX for everything D:?
+
 operator addForce<<<index>>>(
 	io Ref<Cloth> _cloth, 
 	io Ref<GeometryAttributes> _attributes,
 	in Vec3 _force
 	)
 {
-	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
-	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
-	vel.values[index] += _force / mass.values[index];
+	addForcePerVertex(index, _cloth, _attributes, _force);
 }
 
 operator simulateCloth<<<index>>>(
@@ -33,13 +30,15 @@ operator simulateCloth<<<index>>>(
 }
 
 // Inherit from points 
-object Cloth : PolygonMesh
+object Cloth : Points
 {
+	Boolean m_useGPU;
+
 	Boolean m_isActive;
 	Vec3 m_gravity;
 	Float32 m_fps;
 
-	SpringConstraint constraints[];
+	SpringConstraint constraints;
 
 	//Per Vertex attributes
 	IntegerAttribute m_attribMovable;
@@ -53,13 +52,44 @@ function Cloth.ctor!()
 {
     this.setupAttribs();
 
-
+    this.constraints.resize(0);
 }
 
 function Cloth.addForce!(in Vec3 _force)
 {
-	addForce<<<this.polygonPointsCount()>>>(this, this.getAttributes(), _force);
+	// There is an inherent overhead in a PEX that may make it less efficient than serial calls in the case 
+	// that the operator that is called is trivial. Parallel executions best with large workloads. - Fabric Docs
+	Size pointCount = this.elementCount();
+	Ref<GeometryAttributes> attribs = this.getAttributes();
+
+	if( pointCount < 1000 )
+	{
+		// Process in serial for small datasets
+		for(Index i = 0; i < pointCount; i++)
+		{
+			addForcePerVertex(i, this, attribs, _force);
+		}
+	}
+	else
+	{
+		// Instanciate PEX call for large datasets
+		addForce<<<pointCount>>>(this, attribs, _force);
+	}
 }
+
+/// \internal
+inline private addForcePerVertex(
+	in Index _index,
+	io Ref<Cloth> _cloth, 
+	io Ref<GeometryAttributes> _attributes,
+	in Vec3 _force
+	)
+{
+	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+	vel.values[_index] += _force / mass.values[_index];
+}
+
 
 function Cloth.setupAttribs!()
 {
@@ -80,7 +110,7 @@ function Cloth.step!()
 	Vec3 a = Vec3(1,1,1);
     Vec3 b = Vec3(1,0,1);
     
-	for(Index i = 0; i < constraints.size(); i++)
+	for(Index i = 0; i < this.constraints.size(); i++)
 	{
 		this.constraints[i].solve(a, b);
 	}

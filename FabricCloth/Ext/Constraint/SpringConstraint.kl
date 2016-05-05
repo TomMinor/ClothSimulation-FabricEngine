@@ -1,1 +1,46 @@
 require Math;
+
+interface BaseConstraint
+{
+	solve(io Vec3 _a, io Vec3 _b);
+};
+
+object SpringConstraint : BaseConstraint
+{
+	Float32 m_restDist;
+};
+
+function SpringConstraint.solve(io Vec3 _a, io Vec3 _b)
+{
+	Vec3 ab = _a - _b;
+	Float64 currentDist = ab.length();
+
+	Vec3 corrective = ab * (1.0 * this.m_restDist / currentDist);
+	Vec3 correctiveHalf = corrective * 0.5;
+
+	_a += correctiveHalf;
+	_b -= correctiveHalf;
+
+	//// Hooke's law
+	/*
+    Float32 wSum = this.invMass0 + this.invMass1;
+    if (wSum == 0.0f){
+		return false;
+    }
+
+	Vec3    n = pos1 - pos0;
+	n.normalize();
+	Float32 d = n.length;
+	
+	Vec3 corr;
+	if (d < restLength){
+		corr = this.compressionStiffness * n * (d - restLength) / wSum;
+    }else{
+		corr = this.stretchStiffness * n * (d - restLength) / wSum;
+    }
+
+	corr0 =  this.invMass0 * corr;
+	corr1 = -this.invMass1 * corr;
+	return true;
+	*/
+}
