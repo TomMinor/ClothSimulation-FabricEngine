@@ -7,7 +7,6 @@ interface BaseConstraint;
 // http://docs.fabric-engine.com/FabricEngine/1.13.0/HTML/KLProgrammingGuide/types.html#forward-declaration-of-objects-and-interfaces
 object SpringConstraint;
 
-
 operator addForce<<<index>>>(
 	io Ref<Cloth> _cloth, 
 	io Ref<GeometryAttributes> _attributes,
@@ -29,6 +28,11 @@ operator simulateCloth<<<index>>>(
 	vel.values[index] += _force / mass.values[index];
 }
 
+// object ConstraintAttribute : Vec3Attribute
+// {
+
+// };
+
 // Inherit from points 
 object Cloth : Points
 {
@@ -38,13 +42,15 @@ object Cloth : Points
 	Vec3 m_gravity;
 	Float32 m_fps;
 
-	SpringConstraint constraints;
+	// SpringConstraint constraints;
 
 	//Per Vertex attributes
 	IntegerAttribute m_attribMovable;
 	ScalarAttribute m_attribMass;
 	Vec3Attribute m_attribPrevPos;
 	Vec3Attribute m_attribAcceleration;
+
+	// ConstraintAttribute m_attribConstraint;
 	// Vec3Attribute m_attribAccumulatedNormal;
 };
 
@@ -52,7 +58,7 @@ function Cloth.ctor!()
 {
     this.setupAttribs();
 
-    this.constraints.resize(0);
+    // this.constraints.resize(0);
 }
 
 function Cloth.addForce!(in Vec3 _force)
@@ -102,6 +108,9 @@ function Cloth.setupAttribs!()
     this.m_attribMass 				= attributes.getOrCreateScalarAttribute("mass");
     this.m_attribPrevPos 			= attributes.getOrCreateVec3Attribute("prevpos");
     this.m_attribAcceleration 		= attributes.getOrCreateVec3Attribute("accel");
+
+    // this.m_attribConstraint = ConstraintAttribute();
+    // this.m_attribConstraint._attachToContainer("constraintTest", attributes);
     // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
 }
 
@@ -110,8 +119,8 @@ function Cloth.step!()
 	Vec3 a = Vec3(1,1,1);
     Vec3 b = Vec3(1,0,1);
     
-	for(Index i = 0; i < this.constraints.size(); i++)
-	{
-		this.constraints[i].solve(a, b);
-	}
+	// for(Index i = 0; i < this.constraints.size(); i++)
+	// {
+	// 	this.constraints[i].solve(a, b);
+	// }
 }
