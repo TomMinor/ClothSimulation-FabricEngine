@@ -4,4 +4,9 @@
 
     "Constraint/SpringConstraint.kl"
   ]
+
+  "dfgPresets": {
+    "dir": "DFG",
+    "presetPath": "SoftbodyDynamics"
+    }
 }

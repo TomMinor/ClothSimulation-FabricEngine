@@ -33,13 +33,25 @@ operator simulateCloth<<<index>>>(
 
 // };
 
-// Inherit from points 
+/**
+ * The Cloth object extends the Points functionality with soft body dynamics simulated using constraints. 
+ * Building 
+ * 
+ * Per vertex data is stored in GeometryAttributes, such as mass and acceleration.
+ * 
+ * 
+ * 
+ */
 object Cloth : Points
 {
 	Boolean m_useGPU;
 
 	Boolean m_isActive;
 	Vec3 m_gravity;
+	
+	Float64 m_currentTime;
+	Float64 m_previousTime;
+	Float64 m_deltaTime;
 	Float32 m_fps;
 
 	// SpringConstraint constraints;
@@ -54,11 +66,19 @@ object Cloth : Points
 	// Vec3Attribute m_attribAccumulatedNormal;
 };
 
-function Cloth.ctor!()
+/**
+ * Constructor initializes the cloth constraints based on the topology of the PolygonMesh.
+ * Quad based meshes will work best.
+ * 
+ * \param _mesh will be used to initialize the constraint setup of the cloth.
+ */
+function Cloth(in PolygonMesh _mesh)
 {
     this.setupAttribs();
 
-    // this.constraints.resize(0);
+    report( "Cloth Init >> " + _mesh.polygonCount() );
+
+    //this.constraints.resize(0);
 }
 
 function Cloth.addForce!(in Vec3 _force)
@@ -114,13 +134,20 @@ function Cloth.setupAttribs!()
     // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
 }
 
-function Cloth.step!()
+function Cloth.stepSimulation!()
 {   
-	Vec3 a = Vec3(1,1,1);
-    Vec3 b = Vec3(1,0,1);
+	// Solve constraints
     
-	// for(Index i = 0; i < this.constraints.size(); i++)
-	// {
-	// 	this.constraints[i].solve(a, b);
-	// }
+	// Step particles
+	
+	// Solve collisions
+}
+
+operator entry()
+{
+	PolygonMesh mesh = PolygonMesh();
+	mesh.addPlane(Xfo(), 1, 1, 10, 10);
+	Cloth sim(mesh);
+
+	report("Success");
 }
