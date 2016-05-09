@@ -1,0 +1,48 @@
+require Geometry;
+
+interface BaseForce;
+
+object TurbulentForce : BaseForce
+{
+	Vec3 center;
+	Float32 amplitude;
+	Vec3 frequency;
+};
+
+function TurbulentForce( Vec3 _center, Float32 _amplitude, Vec3 _frequency )
+{
+	this.center = _center;
+	this.amplitude = _amplitude;
+	this.frequency = _frequency;
+}
+
+function TurbulentForce.initialise!()
+{
+	// Empty
+}
+
+function TurbulentForce.apply!(in GeometryAttributes attrs)
+{
+	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
+  	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');
+  	// Update in parallel
+  	satisfy<<<velocities.values.size()>>>(velocities.values, movable.values, g );
+	v.incrementVersion();
+}
+
+
+
+operator applyTurbulizeVec3_task<<<index>>>(
+				io Vec3 velocities[],
+  				Integer movable[],
+  				Float32 g,
+  				Vec3 center, Float32 amplitude, Vec3 frequency)
+{
+  if ( !movable[index] ) {
+    Vec3 q = center + frequency * p[index];
+    velocities[index] += Vec3(	0.1 * amplitude * perlinNoise(q.x, q.z, q.y),
+  				0.1 * amplitude * perlinNoise(q.y, q.x, q.z),
+      				0.1 * amplitude * perlinNoise(q.z, q.y, q.x)
+      		       	);
+  }
+}

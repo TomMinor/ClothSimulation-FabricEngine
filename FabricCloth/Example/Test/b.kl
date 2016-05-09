@@ -1,0 +1,6 @@
+require Geometry;
+
+object TestSim : Points
+{
+		ConstraintInterface tmp;	
+};

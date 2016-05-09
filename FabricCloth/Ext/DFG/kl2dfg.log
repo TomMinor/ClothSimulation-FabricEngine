@@ -1,48 +1,25 @@
 [FABRIC:MT] Fabric Engine version 2.1.0
-[FABRIC:MT] Loading DFG presets from /home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Presets/DFG
-[FABRIC:MT] Loading DFG presets from /home/i7245143/Fabric/Presets
-[FABRIC:MT] Registered extension {TestExt} in directory: /home/i7245143/Documents/Fabric/TestExt
-[FABRIC:MT] Registered extension {ParticleSystem} in directory: /home/i7245143/src/FabricCPS/Ext
-[FABRIC:MT] Registered extensions {Math:1.3.0,AttributeHelpers:1.0.0,Manipulation:1.1.0,Images:1.0.2,DFGWrapper:1.1.0,FabricOBJ:1.1.0,OSOGL:1.1.0,Parameters:1.0.0,Animation:1.1.0,FabricSynchronization:1.1.0,Util:1.2.0,FabricStatistics:1.1.0,Bullet:1.0.1,OpenImageIO:1.0.2,BulletHelpers:1.0.0,FabricOGL:1.1.0,Characters:1.1.0,Alembic:1.0.0,DFGHelpers,FabricInterfaces:1.0.1,FileIO:1.2.0,Singletons:1.1.0,InlineDrawing:1.3.0,AlembicWrapper:1.3.0,JSON:1.0.0,Fbx:1.1.0,Containers:1.1.0,Geometry:1.3.0,FbxHelpers:1.0.2} in directory: /home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Exts
-[FABRIC:MT] Ignored extension directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': unable to open directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': No such file or directory (code 2 [0x2])
+[FABRIC:MT] Loading DFG presets from /home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Presets/DFG
+[FABRIC:MT] Loading DFG presets from /home/tom/Fabric/Presets
+[FABRIC:MT] Registered extensions {DFGHelpers,Animation:1.1.0,Fbx:1.1.0,FileIO:1.2.0,InlineDrawing:1.3.0,Containers:1.1.0,FabricStatistics:1.1.0,BulletHelpers:1.0.0,OpenImageIO:1.0.2,Geometry:1.3.0,Alembic:1.0.0,Images:1.0.2,JSON:1.0.0,FabricOGL:1.1.0,AlembicWrapper:1.3.0,FbxHelpers:1.0.2,Math:1.3.0,Manipulation:1.1.0,DFGWrapper:1.1.0,Parameters:1.0.0,FabricInterfaces:1.0.1,Util:1.2.0,Bullet:1.0.1,FabricSynchronization:1.1.0,Characters:1.1.0,OSOGL:1.1.0,FabricOBJ:1.1.0,Singletons:1.1.0,AttributeHelpers:1.0.0} in directory: /home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Exts
+[FABRIC:MT] Ignored extension directory '/home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': unable to open directory '/home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': No such file or directory (code 2 [0x2])
+[FABRIC:MT] Registered extension {ClothSimulation} in directory: /home/tom/src/agsdt-TomMinor/FabricCloth/Ext
 [FABRIC:MT] IRCache: Not pruning since last prune was less than 24 hours ago
-[FABRIC:MT] Loaded extension Math in 115.906ms (cached)
-[FABRIC:MT] Loaded extension FabricSynchronization in 118.098ms (cached)
-[FABRIC:MT] Loaded extension FabricStatistics in 38.435ms (cached)
-[FABRIC:MT] Loaded extension Singletons in 18.976ms (cached)
-[FABRIC:MT] Loaded extension Util in 57.457ms (cached)
-[FABRIC:MT] Loaded extension Containers in 316.405ms (cached)
-[FABRIC:MT] Loaded extension Geometry in 407.428ms (cached)
-[FABRIC:MT] Loaded extension ClothSimulation in 312.408ms (cached)
-registerFunction: thisType='(null)' func='function addForcePerVertex( in Index _index, io Ref<Cloth> _cloth, io Ref<GeometryAttributes> _attributes, in Vec3 _force )'
-  Skipped: isInternal()
-registerFunction: thisType='Cloth' func='function Cloth?( in PolygonMesh _mesh )'
-  Added to bin[normal][Cloth]
-registerFunction: thisType='Cloth' func='function Cloth.addForce!( in Vec3 _force )'
-  Added to bin[normal][Cloth.addForce]
-registerFunction: thisType='Cloth' func='function Cloth.setupAttribs!()'
-  Added to bin[normal][Cloth.setupAttribs]
-registerFunction: thisType='Cloth' func='function Cloth.stepSimulation!()'
-  Added to bin[normal][Cloth.stepSimulation]
-registerFunction: thisType='BaseConstraint' func='function BaseConstraint.solve?( io Vec3 _a, io Vec3 _b )'
-  Added to bin[normal][BaseConstraint.solve]
-registerFunction: thisType='SpringConstraint' func='function SpringConstraint.solve?( io Vec3 _a, io Vec3 _b )'
-  Added to bin[normal][SpringConstraint.solve]
-registerFunction: thisType='Cloth' func='function Cloth?( in PolygonMesh _mesh )'
-registerFunction: thisType='Cloth' func='function Cloth.addForce!( in Vec3 _force )'
-registerFunction: thisType='Cloth' func='function Cloth.setupAttribs!()'
-registerFunction: thisType='Cloth' func='function Cloth.stepSimulation!()'
-registerFunction: thisType='SpringConstraint' func='function SpringConstraint.solve?( io Vec3 _a, io Vec3 _b )'
-processFunctions
-  bin[normal][Cloth][1] (asArray=false)
-    thisType='Cloth' code='function Cloth?( in PolygonMesh _mesh )'
-  bin[normal][Cloth.addForce][1] (asArray=false)
-    thisType='Cloth' code='function Cloth.addForce!( in Vec3 _force )'
-  bin[normal][Cloth.setupAttribs][0] (asArray=false)
-    thisType='Cloth' code='function Cloth.setupAttribs!()'
-  bin[normal][Cloth.stepSimulation][0] (asArray=false)
-    thisType='Cloth' code='function Cloth.stepSimulation!()'
-  bin[normal][BaseConstraint.solve][2] (asArray=false)
-    thisType='BaseConstraint' code='function BaseConstraint.solve?( io Vec3 _a, io Vec3 _b )'
-  bin[normal][SpringConstraint.solve][2] (asArray=false)
-    thisType='SpringConstraint' code='function SpringConstraint.solve?( io Vec3 _a, io Vec3 _b )'
+[FABRIC:MT] Loaded extension Math in 103.715ms (cached)
+[FABRIC:MT] Loaded extension FabricSynchronization in 31.420ms (cached)
+[FABRIC:MT] Loaded extension FabricStatistics in 75.838ms (cached)
+[FABRIC:MT] Loaded extension Singletons in 25.171ms (cached)
+[FABRIC:MT] Loaded extension Util in 58.250ms (cached)
+[FABRIC:MT] Loaded extension Containers in 1060.718ms (cached)
+[FABRIC:MT] Loaded extension Geometry in 824.473ms (cached)
+[FABRIC:MT] [ClothSimulation] Constraint/SpringConstraint.kl:11:1: error: 'BaseConstraint': type not registered
+[FABRIC:MT] [ClothSimulation] Force/GravityForce.kl:5:1: error: interface 'Ref<BaseForce>' has not been defined
+[FABRIC:MT] [ClothSimulation] Particle/Particle.kl:6:1: error: interface 'BaseForce' already registered with a different definition
+[FABRIC:MT] [ClothSimulation] Error encountered while loading extension; extension disabled
+[FABRIC:MT] [ClothSimulation] Error description: KL compile failed: 'BaseConstraint': type not registered
+[FABRIC:MT] Loaded extension ClothSimulation in 7.216ms (first time)
+[FABRIC:MT] [ClothSimulation] Version range [1.0.1,1.1.0) requested but version 0.0.0 already loaded
+[FABRIC:MT] [ClothSimulation] Requested version range [1.0.1,1.1.0) was determined by the following dependencies:
+[FABRIC:MT] [ClothSimulation] Loaded version 0.0.0 was selected by the following dependencies:
+[FABRIC:MT] [ClothSimulation]   CAPI (Scripting): *
+[FABRIC:MT] (internal): error: extension 'ClothSimulation' has been disabled

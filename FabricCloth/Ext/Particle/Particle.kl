@@ -1,37 +1,73 @@
 require Math;
 require Geometry;
 
-interface BaseConstraint;
 
-// Forward declare this as it lives elsewhere in the extension
-// http://docs.fabric-engine.com/FabricEngine/1.13.0/HTML/KLProgrammingGuide/types.html#forward-declaration-of-objects-and-interfaces
-object SpringConstraint;
-
-operator addForce<<<index>>>(
-	io Ref<Cloth> _cloth, 
-	io Ref<GeometryAttributes> _attributes,
-	in Vec3 _force
-	)
+/// \internal
+interface BaseForce
 {
-	addForcePerVertex(index, _cloth, _attributes, _force);
+	initialise!();
+	apply!(io GeometryAttributes attributes);
+};
+
+/// \internal
+interface BaseIntegrator
+{
+	initialise!();
+	apply!(io GeometryAttributes attributes);
+};
+
+/**
+ * Interface for all constraints
+ * 
+ * \dfgPresetOmit
+ */
+interface BaseConstraint
+{
+	/// 
+	/// \internal
+	/// Grid is hardcoded now, so all the solvers need to have rows/columns passed in
+	/// Once I've sorted out proper constraint calculations I'll have to pass something elese in
+	solve!(io GeometryAttributes attrs, UInt32 _rows, UInt32 _cols);
+};
+
+
+object VerletIntergrator : BaseIntegrator
+{
+	Float32 rate;
+};
+
+function VerletIntergrator()
+{
+	this.initialise();
 }
 
-operator simulateCloth<<<index>>>(
-	io Ref<Cloth> _cloth, 
-	io Ref<GeometryAttributes> _attributes,
-	in Vec3 _force
-	)
+function VerletIntergrator.initialise!()
 {
-	Vec3Attribute pos = _attributes.getAttribute("positions", Vec3Attribute);
-	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
-	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
-	vel.values[index] += _force / mass.values[index];
+	this.rate = 0.99; // Apply damping to the velocity
 }
 
-// object ConstraintAttribute : Vec3Attribute
-// {
+function VerletIntergrator.apply!(io GeometryAttributes attributes)
+{
+	Ref<Vec3Attribute> positions = attributes.getPositions();
+	Ref<Vec3Attribute> velocities = attributes.getOrCreateVec3Attribute('velocities');
+	integrate<<<positions.values.size()>>>(	positions.values,
+						velocities.values,
+						this.rate
+						);
+	positions.incrementVersion();
+	velocities.incrementVersion();
+}
 
-// };
+operator integrate<<<index>>>(
+  io Vec3 positions[],
+  io Vec3 velocities[],
+  Float32 rate
+  )
+{
+  positions[index] += rate * velocities[index];
+  velocities[index] *= 0.99;
+}
+
 
 /**
  * The Cloth object extends the Points functionality with soft body dynamics simulated using constraints. 
@@ -42,28 +78,29 @@ operator simulateCloth<<<index>>>(
  * 
  * 
  */
-object Cloth : Points
+object ClothSimulation : Points
 {
-	Boolean m_useGPU;
+	PolygonMesh mesh;
 
-	Boolean m_isActive;
-	Vec3 m_gravity;
-	
-	Float64 m_currentTime;
-	Float64 m_previousTime;
-	Float64 m_deltaTime;
-	Float32 m_fps;
+	Boolean isActive;
 
-	// SpringConstraint constraints;
+	//Per Vertex _attributes
+	IntegerAttribute attribMovable;
+	ScalarAttribute attribMass;
+	Vec3Attribute attribPrevPos;
+	Vec3Attribute attribAcceleration;
 
-	//Per Vertex attributes
-	IntegerAttribute m_attribMovable;
-	ScalarAttribute m_attribMass;
-	Vec3Attribute m_attribPrevPos;
-	Vec3Attribute m_attribAcceleration;
+	// Force stack
+	BaseForce forceStack[];
 
-	// ConstraintAttribute m_attribConstraint;
-	// Vec3Attribute m_attribAccumulatedNormal;
+	// Constraint stack
+	BaseConstraint constraintStack[];
+
+	BaseIntegrator integrator;
+
+	// Grid info
+	UInt32 rows;
+	UInt32 cols;
 };
 
 /**
@@ -72,16 +109,41 @@ object Cloth : Points
  * 
  * \param _mesh will be used to initialize the constraint setup of the cloth.
  */
-function Cloth(in PolygonMesh _mesh)
+function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseConstraint _constraintStack[], BaseIntegrator _integrator, UInt32 _rows, UInt32 _cols)
 {
-    this.setupAttribs();
+	this.setupAttribs();
 
-    report( "Cloth Init >> " + _mesh.polygonCount() );
+	this.forceStack = _forceStack;
+	this.integrator = _integrator;
+	this.constraintStack = _constraintStack;
 
-    //this.constraints.resize(0);
+	this.mesh = _mesh;
+
+	Count adjRows = _rows;
+	Count adjCols = _cols;
+	if (adjRows < 1)  adjRows = 1;
+	if (adjCols < 1)  adjCols = 1;
+
+	this.rows = _rows;
+	this.cols = _cols;
+  
+	// Initialise attribuets
+	GeometryAttributes attrs = _mesh.getAttributes();
+	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
+	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');
+	
+	// Pin the cloth at these points for testing
+	for (Index row = 0; _rows <= adjRows; ++row)
+	{
+		movable.values[_rows * (adjCols + 1)] = true;
+	}
+
+	report( "Cloth Init >> " + _mesh.polygonCount() );
+
+	//this.constraints.resize(0);
 }
 
-function Cloth.addForce!(in Vec3 _force)
+function ClothSimulation.addForce!(in Vec3 _force)
 {
 	// There is an inherent overhead in a PEX that may make it less efficient than serial calls in the case 
 	// that the operator that is called is trivial. Parallel executions best with large workloads. - Fabric Docs
@@ -106,7 +168,7 @@ function Cloth.addForce!(in Vec3 _force)
 /// \internal
 inline private addForcePerVertex(
 	in Index _index,
-	io Ref<Cloth> _cloth, 
+	io Ref<ClothSimulation> _cloth, 
 	io Ref<GeometryAttributes> _attributes,
 	in Vec3 _force
 	)
@@ -116,38 +178,76 @@ inline private addForcePerVertex(
 	vel.values[_index] += _force / mass.values[_index];
 }
 
-
-function Cloth.setupAttribs!()
+///
+/// \brief      Create necessary attributes
+///
+/// \internal
+function ClothSimulation.setupAttribs!()
 {
 	Ref<GeometryAttributes> attributes = this.getAttributes();
 	// if (GPU){
     // 	attributes.convertToSVM();
     // }
 
-    this.m_attribMovable			= attributes.getOrCreateIntegerAttribute("movable");
-    this.m_attribMass 				= attributes.getOrCreateScalarAttribute("mass");
-    this.m_attribPrevPos 			= attributes.getOrCreateVec3Attribute("prevpos");
-    this.m_attribAcceleration 		= attributes.getOrCreateVec3Attribute("accel");
+    this.attribMovable			= attributes.getOrCreateIntegerAttribute("movable");
+    this.attribMass 			= attributes.getOrCreateScalarAttribute("mass");
+    this.attribPrevPos 			= attributes.getOrCreateVec3Attribute("prevpos");
+    this.attribAcceleration 		= attributes.getOrCreateVec3Attribute("accel");
 
     // this.m_attribConstraint = ConstraintAttribute();
     // this.m_attribConstraint._attachToContainer("constraintTest", attributes);
     // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
 }
 
-function Cloth.stepSimulation!()
+function ClothSimulation.stepSimulation!()
 {   
+	GeometryAttributes attrs = this.getAttributes();
+
 	// Solve constraints
-    
-	// Step particles
-	
-	// Solve collisions
+	for(Index i = 0; i < this.constraintStack.size(); ++i)
+	{
+		 this.constraintStack[i].solve(attrs, this.rows, this.cols);
+	}
+
+	// Solve forces
+	// for(Index i = 0; i < this.forceStack.size(); ++i)
+	// {
+	// 	 this.forceStack[i].apply(attrs);
+	// }
+
+	// Integrate
+	this.integrator.apply(attrs);
 }
 
-operator entry()
+Vec3[] ClothSimulation.getAllPoints()
 {
-	PolygonMesh mesh = PolygonMesh();
-	mesh.addPlane(Xfo(), 1, 1, 10, 10);
-	Cloth sim(mesh);
+	GeometryAttributes attrs = this.getAttributes();
+	Vec3Attribute pos = attrs.getAttribute("positions", Vec3Attribute);
+	return pos.values;
+}
 
-	report("Success");
+PolygonMesh ClothSimulation.getMesh()
+{
+	return this.mesh;
+}
+
+operator addForce<<<index>>>(
+	io Ref<ClothSimulation> _cloth, 
+	io Ref<GeometryAttributes> _attributes,
+	in Vec3 _force
+	)
+{
+	addForcePerVertex(index, _cloth, _attributes, _force);
+}
+
+operator simulateCloth<<<index>>>(
+	io Ref<ClothSimulation> _cloth, 
+	io Ref<GeometryAttributes> _attributes,
+	in Vec3 _force
+	)
+{
+	Vec3Attribute pos = _attributes.getAttribute("positions", Vec3Attribute);
+	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+	vel.values[index] += _force / mass.values[index];
 }

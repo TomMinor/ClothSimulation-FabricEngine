@@ -1,46 +1,100 @@
 require Math;
+require Geometry;
 
-interface BaseConstraint
-{
-	solve(io Vec3 _a, io Vec3 _b);
-};
+
+/**
+ * \brief Implements Hookes law to simulate a spring between 2 points
+ * 
+ * \dfgPresetFolder "Constraints"
+ */
 
 object SpringConstraint : BaseConstraint
 {
-	Float32 m_restDist;
+
 };
 
-function SpringConstraint.solve(io Vec3 _a, io Vec3 _b)
+///
+/// \brief SpringConstraints ctor
+///
+function SpringConstraint()
 {
-	Vec3 ab = _a - _b;
-	Float64 currentDist = ab.length();
+}
 
-	Vec3 corrective = ab * (1.0 * this.m_restDist / currentDist);
-	Vec3 correctiveHalf = corrective * 0.5;
+function SpringConstraint.solve!(io GeometryAttributes attrs, UInt32 _rows, UInt32 _cols)
+{
+	// adjust the amount of rows and columns.
+	Count adjRows = _rows;
+	Count adjCols = _cols;
+	if (adjRows < 1)  adjRows = 1;
+	if (adjCols < 1)  adjCols = 1;
+	Scalar width  = adjCols;
+	Scalar height = adjRows;
+	Float32 colWidth  = width  / adjCols;
+	Float32 rowHeight = height / adjRows;
 
-	_a += correctiveHalf;
-	_b -= correctiveHalf;
+	Ref<Vec3Attribute> positions = attrs.getPositions();
+	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
+	Ref<IntegerAttribute> movable = attrs.getOrCreateIntegerAttribute('movable');
+	satisfyConstraints<<<positions.values.size()>>>(
+					positions.values,
+					velocities.values,
+					movable.values,
+					adjCols,
+					adjRows,
+					colWidth * colWidth,
+					rowHeight * rowHeight,
+					0.5
+					);
+	velocities.incrementVersion();
+}
 
-	//// Hooke's law
-	/*
-    Float32 wSum = this.invMass0 + this.invMass1;
-    if (wSum == 0.0f){
-		return false;
-    }
+operator satisfyConstraints<<<index>>>(
+  Vec3 positions[],
+  io Vec3 velocities[],
+  Integer movable[],
+  // hard coded grid shape for now, modified this from a canvas sample
+  UInt32 cols,
+  UInt32 rows,
+  Float32 colWidthSq,
+  Float32 rowHeightSq,
+  Float32 s
+  )
+{
+	UInt32 row = index / (cols + 1);
+	UInt32 col = index % (cols + 1);
 
-	Vec3    n = pos1 - pos0;
-	n.normalize();
-	Float32 d = n.length;
-	
-	Vec3 corr;
-	if (d < restLength){
-		corr = this.compressionStiffness * n * (d - restLength) / wSum;
-    }else{
-		corr = this.stretchStiffness * n * (d - restLength) / wSum;
-    }
+	if ( !movable[index] )
+	{
+		if ( row > 0 )
+		{
+			Vec3 delta = positions[(row - 1) * (cols + 1) + col] - positions[index];
+			Float32 deltaLenSq = delta.lengthSquared();
+			Float32 diff = (deltaLenSq - rowHeightSq) / (rowHeightSq + deltaLenSq) * s;
+			velocities[index] += delta * diff;
+		}
 
-	corr0 =  this.invMass0 * corr;
-	corr1 = -this.invMass1 * corr;
-	return true;
-	*/
+		if ( row < rows )
+		{
+			Vec3 delta = positions[(row + 1) * (cols + 1) + col] - positions[index];
+			Float32 deltaLenSq = delta.lengthSquared();
+			Float32 diff = (deltaLenSq - rowHeightSq) / (rowHeightSq + deltaLenSq) * s;
+			velocities[index] += delta * diff;
+		}
+
+		if ( col > 0 )
+		{
+			Vec3 delta = positions[row * (cols + 1) + col - 1] - positions[index];
+			Float32 deltaLenSq = delta.lengthSquared();
+			Float32 diff = (deltaLenSq - colWidthSq) / (colWidthSq + deltaLenSq) * s;
+			velocities[index] += delta * diff;
+		}
+
+		if ( col < cols )
+		{
+			Vec3 delta = positions[row * (cols + 1) + col + 1] - positions[index];
+			Float32 deltaLenSq = delta.lengthSquared();
+			Float32 diff = (deltaLenSq - colWidthSq) / (colWidthSq + deltaLenSq) * s;
+			velocities[index] += delta * diff;
+		}
+	}
 }
