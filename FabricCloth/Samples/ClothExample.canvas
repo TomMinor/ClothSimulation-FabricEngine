@@ -2,15 +2,15 @@
   "objectType" : "Graph",
   "metadata" : {
     "timeline_timerFps" : "30",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.9850203394889832,\n    \"y\" : 0.01386902946978807,\n    \"z\" : -0.1718842387199402,\n    \"t\" : 15.53414821624756\n    },\n  \"row1\" : {\n    \"x\" : -3.790485720855941e-07,\n    \"y\" : 0.9967464804649353,\n    \"z\" : 0.08042643964290619,\n    \"t\" : 5.034776210784912\n    },\n  \"row2\" : {\n    \"x\" : 0.1724422872066498,\n    \"y\" : -0.07922010868787766,\n    \"z\" : 0.9818328619003296,\n    \"t\" : 68.57376861572266\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.781768798828125,\n    \"y\" : 0.08733320236206055,\n    \"z\" : -0.617431104183197,\n    \"t\" : -16.84187698364258\n    },\n  \"row1\" : {\n    \"x\" : -7.52511766677344e-07,\n    \"y\" : 0.9901241660118103,\n    \"z\" : 0.140055924654007,\n    \"t\" : 10.95154285430908\n    },\n  \"row2\" : {\n    \"x\" : 0.6235751509666443,\n    \"y\" : -0.1094874143600464,\n    \"z\" : 0.7740663290023804,\n    \"t\" : 58.79942321777344\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "timeline_loopMode" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.1062468811869621\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.6991320252418518\n  }",
     "timeline_simMode" : "0",
-    "camera_focalDistance" : "69.13198852539062",
-    "timeline_current" : "19",
+    "camera_focalDistance" : "85.59844970703125",
+    "timeline_current" : "2",
     "timeline_end" : "50",
-    "uiGraphPan" : "{\n  \"x\" : 767.6538806615329,\n  \"y\" : 24.55083416248048\n  }"
+    "uiGraphPan" : "{\n  \"x\" : 1120.961906407449,\n  \"y\" : -1088.446923758712\n  }"
     },
   "title" : "",
   "ports" : [
@@ -1212,7 +1212,7 @@
       "objectType" : "Inst",
       "metadata" : {
         "uiComment" : "The force stack is evaluated every sim step",
-        "uiGraphPos" : "{\"x\":-308.2640380859375,\"y\":1634.40576171875}",
+        "uiGraphPos" : "{\"x\":-233.8861083984375,\"y\":1607.2294921875}",
         "uiCommentExpanded" : "true"
         },
       "name" : "Push_6",
@@ -1262,7 +1262,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-541.5496215820312,\"y\":1681.654418945312}"
+        "uiGraphPos" : "{\"x\":-571.5870361328125,\"y\":1690.236206054688}"
         },
       "name" : "TurbulentForce_2",
       "ports" : [
@@ -1810,9 +1810,7 @@
       "Transform_3.xfo"
       ],
     "Push_5.array" : [
-      "Push_6.array"
-      ],
-    "Push_6.array" : [
+      "Push_6.array",
       "ClothSimulation_2.forceStack"
       ],
     "GravityForce_2.result" : [
