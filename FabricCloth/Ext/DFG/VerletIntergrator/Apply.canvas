@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: VerletIntergrator\n  attributes: GeometryAttributes\n"
+    "uiTooltip" : "Supported types:\n  this: VerletIntergrator\n  attributes: Ref<GeometryAttributes>\n"
     },
   "title" : "Apply",
   "ports" : [
@@ -27,11 +27,12 @@
   "extDeps" : {
     "ClothSimulation" : "*"
     },
-  "presetGUID" : "8EFB321AD581DACD02341344F72C76B8",
+  "presetGUID" : "A07316FD73EF56BF687D9AC4732729CA",
   "code" : "require ClothSimulation;
 
 dfgEntry {
-  this.apply(attributes);
+  Ref<GeometryAttributes> attributes_ref = attributes;
+  this.apply(attributes_ref);
 }
 "
   }

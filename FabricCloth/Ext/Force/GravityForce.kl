@@ -20,7 +20,7 @@ function GravityForce.initialise!()
 	// Empty
 }
 
-function GravityForce.apply!(io GeometryAttributes attrs)
+function GravityForce.apply!(io Ref<GeometryAttributes> attrs)
 {
 	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
   	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');

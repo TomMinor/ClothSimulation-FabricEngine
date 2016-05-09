@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "* Constructor initializes the cloth constraints based on the topology of the PolygonMesh.\n* Quad based meshes will work best.\n*\n* \\param _mesh will be used to initialize the constraint setup of the cloth.\n\nInitialise attribuets\nPin the cloth at these points for testing\nthis.constraints.resize(0);\n\nSupported types:\n  _mesh: PolygonMesh\n  _forceStack: BaseForce[]\n  _constraintStack: BaseConstraint[]\n  _integrator: BaseIntegrator\n  _rows: UInt32\n  _cols: UInt32\n  result: ClothSimulation\n"
+    "uiTooltip" : "* Constructor initializes the cloth constraints based on the topology of the PolygonMesh.\n* Quad based meshes will work best.\n*\n* \\param _mesh will be used to initialize the constraint setup of the cloth.\n\ngetAttributes();\nInitialise attributes\nPin the cloth at these points for testing\nfor (Index row = 0; _rows <= adjRows; ++row)\n{\nmovable.values[_rows * (adjCols + 1)] = true;\n}\nthis.setupAttribs();\nthis.constraints.resize(0);\n\nSupported types:\n  _mesh: PolygonMesh\n  _forceStack: BaseForce[]\n  _constraintStack: BaseConstraint[]\n  _integrator: BaseIntegrator\n  _rows: UInt32\n  _cols: UInt32\n  result: ClothSimulation\n"
     },
   "title" : "ClothSimulation",
   "ports" : [

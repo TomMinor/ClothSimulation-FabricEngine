@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: BaseForce\n  attributes: GeometryAttributes\n"
+    "uiTooltip" : "Supported types:\n  this: BaseForce\n  attributes: Ref<GeometryAttributes>\n"
     },
   "title" : "Apply",
   "ports" : [
@@ -27,11 +27,12 @@
   "extDeps" : {
     "ClothSimulation" : "*"
     },
-  "presetGUID" : "7C9817AEC09800D1A7B21C63EA23E832",
+  "presetGUID" : "69325290F0559204376B03BEF159BFF9",
   "code" : "require ClothSimulation;
 
 dfgEntry {
-  this.apply(attributes);
+  Ref<GeometryAttributes> attributes_ref = attributes;
+  this.apply(attributes_ref);
 }
 "
   }

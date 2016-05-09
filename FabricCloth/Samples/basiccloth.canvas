@@ -1,16 +1,16 @@
 {
   "objectType" : "Graph",
   "metadata" : {
-    "timeline_timerFps" : "1000",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.834538459777832,\n    \"y\" : -0.1258757561445236,\n    \"z\" : 0.5363771915435791,\n    \"t\" : 80.02535247802734\n    },\n  \"row1\" : {\n    \"x\" : -7.450579264656199e-09,\n    \"y\" : 0.9735507369041443,\n    \"z\" : 0.2284706383943558,\n    \"t\" : 77.31327819824219\n    },\n  \"row2\" : {\n    \"x\" : -0.5509493350982666,\n    \"y\" : -0.1906675845384598,\n    \"z\" : 0.8124656081199646,\n    \"t\" : 115.298583984375\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "timeline_timerFps" : "30",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.9845065474510193,\n    \"y\" : 0.02806127816438675,\n    \"z\" : -0.1733079701662064,\n    \"t\" : -11.47260284423828\n    },\n  \"row1\" : {\n    \"x\" : -9.686124258223572e-07,\n    \"y\" : 0.987120509147644,\n    \"z\" : 0.1598446667194366,\n    \"t\" : 10.44943237304688\n    },\n  \"row2\" : {\n    \"x\" : 0.175565168261528,\n    \"y\" : -0.1573521792888641,\n    \"z\" : 0.9718499183654785,\n    \"t\" : 61.83789825439453\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.5562405586242676\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.358283519744873\n  }",
     "timeline_loopMode" : "1",
     "timeline_simMode" : "0",
-    "camera_focalDistance" : "161.0059204101562",
-    "timeline_current" : "1",
+    "camera_focalDistance" : "72.81195068359375",
+    "timeline_current" : "33",
     "timeline_end" : "50",
-    "uiGraphPan" : "{\n  \"x\" : 248.186216081692,\n  \"y\" : -11.59090273811563\n  }"
+    "uiGraphPan" : "{\n  \"x\" : 538.4481385087111,\n  \"y\" : -0.8886314439131127\n  }"
     },
   "title" : "",
   "ports" : [
@@ -23,6 +23,9 @@
       },
     {
       "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
       "nodePortType" : "Out",
       "name" : "rows",
       "execPortType" : "In",
@@ -30,6 +33,9 @@
       },
     {
       "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
       "nodePortType" : "Out",
       "name" : "columns",
       "execPortType" : "In",
@@ -38,9 +44,33 @@
     {
       "objectType" : "Port",
       "nodePortType" : "In",
-      "name" : "instance",
+      "name" : "value",
       "execPortType" : "Out",
-      "typeSpec" : "InlineInstance"
+      "typeSpec" : "ClothSimulation"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "value_2",
+      "execPortType" : "Out",
+      "typeSpec" : "Vec3[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "this",
+      "execPortType" : "Out",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "reset",
+      "execPortType" : "In",
+      "typeSpec" : "Boolean"
       }
     ],
   "extDeps" : {
@@ -50,7 +80,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1226.0068359375,\"y\":423.4169311523438}"
+        "uiGraphPos" : "{\"x\":1204.249145507812,\"y\":404.2445983886719}"
         },
       "name" : "StepSimulation_1",
       "ports" : [
@@ -66,7 +96,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":759.85107421875,\"y\":344.7306518554688}"
+        "uiGraphPos" : "{\"x\":786.2321166992188,\"y\":341.6829223632812}"
         },
       "name" : "If_1",
       "ports" : [
@@ -97,7 +127,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":491.0555114746094,\"y\":250.6251220703125}"
+        "uiGraphPos" : "{\"x\":511.6347045898438,\"y\":248.7377777099609}"
         },
       "name" : "Le_1",
       "ports" : [
@@ -126,7 +156,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-1630.3134765625,\"y\":318.4463806152344}"
+        "uiGraphPos" : "{\"x\":-1530.757568359375,\"y\":371.48974609375}"
         },
       "name" : "GetPlane_1",
       "ports" : [
@@ -138,11 +168,17 @@
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 30
+            },
           "name" : "length"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 30
+            },
           "name" : "width"
           },
         {
@@ -162,7 +198,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-1398.83251953125,\"y\":634.23828125}"
+        "uiGraphPos" : "{\"x\":-1295.831176757812,\"y\":649.8502807617188}"
         },
       "name" : "Transform_1",
       "ports" : [
@@ -188,7 +224,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-1630.97119140625,\"y\":522.1785278320312}"
+        "uiGraphPos" : "{\"x\":-1533.9873046875,\"y\":537.92578125}"
         },
       "name" : "XfoFromSRT_1",
       "ports" : [
@@ -211,7 +247,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Scalar" : 0
+            "Scalar" : 0.8799999952316284
             },
           "name" : "eulerX"
           },
@@ -227,18 +263,24 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Scalar" : -0.7799999713897705
+            "Scalar" : 0.4900000095367432
             },
           "name" : "eulerZ"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 0
+            },
           "name" : "trX"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 1.840000033378601
+            },
           "name" : "trY"
           },
         {
@@ -259,7 +301,7 @@
       "objectType" : "User",
       "metadata" : {
         "uiTitle" : "Input Geometry",
-        "uiGraphPos" : "{\"x\":-1675.245361328125,\"y\":276.1806335449219}",
+        "uiGraphPos" : "{\"x\":-1578.261474609375,\"y\":291.9279174804688}",
         "uiGraphSize" : "{\"w\":443.0460815429688,\"h\":504.4427490234375}"
         },
       "name" : "backDrop",
@@ -269,57 +311,13 @@
       "objectType" : "User",
       "metadata" : {
         "uiTitle" : "Initialise",
-        "uiGraphPos" : "{\"x\":470.0313110351562,\"y\":213.6135711669922}",
+        "uiComment" : "For some reason this isn't properly resetting, reloading the canvas is the only way to reset it right now.",
+        "uiGraphPos" : "{\"x\":508.8157348632812,\"y\":208.0850982666016}",
+        "uiCommentExpanded" : "true",
         "uiGraphSize" : "{\"w\":470.4396362304688,\"h\":409.1215515136719}"
         },
       "name" : "backDrop_2",
       "ports" : []
-      },
-    {
-      "objectType" : "Inst",
-      "metadata" : {
-        "uiGraphPos" : "{\"x\":-161.3689880371094,\"y\":472.4588317871094}"
-        },
-      "name" : "ClothSimulation_1",
-      "ports" : [
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "mesh"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "forceStack"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "constraintStack"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "integrator"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "rows"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "cols"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "Out",
-          "name" : "result"
-          }
-        ],
-      "executable" : "SoftbodyDynamics.ClothSimulation.ClothSimulation",
-      "presetGUID" : "3FE3FA9CE9EB3CB5C59C831B87E57F86"
       },
     {
       "objectType" : "Inst",
@@ -340,7 +338,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-709.319091796875,\"y\":426.2195434570312}"
+        "uiGraphPos" : "{\"x\":-697.1764526367188,\"y\":434.3146362304688}"
         },
       "name" : "SpringConstraint_1",
       "ports" : [
@@ -356,7 +354,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-468.4614868164062,\"y\":412.9633483886719}"
+        "uiGraphPos" : "{\"x\":-406.3497009277344,\"y\":392.1300659179688}"
         },
       "name" : "Push_1",
       "ports" : [
@@ -377,7 +375,7 @@
     {
       "objectType" : "Var",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":716.3936157226562,\"y\":262.1018676757812}"
+        "uiGraphPos" : "{\"x\":755.17822265625,\"y\":256.5734252929688}"
         },
       "name" : "sim",
       "ports" : [
@@ -392,7 +390,7 @@
     {
       "objectType" : "Get",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":525.201416015625,\"y\":537.9739379882812}"
+        "uiGraphPos" : "{\"x\":529.5744018554688,\"y\":499.5457763671875}"
         },
       "name" : "get",
       "ports" : [
@@ -405,11 +403,126 @@
       "varPath" : "sim"
       },
     {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-669.1385498046875,\"y\":202.0528564453125}"
+        },
+      "name" : "GravityForce_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec3" : {
+              "x" : 0,
+              "y" : -0.009999999776482582,
+              "z" : 0
+              }
+            },
+          "name" : "g"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "SoftbodyDynamics.GravityForce.GravityForce",
+      "presetGUID" : "2981E236411798C5DC63D2B2CD74DEA6"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiComment" : "Need to add time to this",
+        "uiGraphPos" : "{\"x\":-672.72998046875,\"y\":298.8153076171875}",
+        "uiCommentExpanded" : "true"
+        },
+      "name" : "TurbulentForce_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "center"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Float32" : 0.5
+            },
+          "name" : "amplitude"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec3" : {
+              "x" : 1,
+              "y" : 1,
+              "z" : 1
+              }
+            },
+          "name" : "frequency"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "SoftbodyDynamics.TurbulentForce.TurbulentForce",
+      "presetGUID" : "5346D5E587B1DDD5A374E2E48D60B4DB"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-461.1167297363281,\"y\":218.6878967285156}"
+        },
+      "name" : "Push_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "array"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "element"
+          }
+        ],
+      "executable" : "Fabric.Core.Array.Push",
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiComment" : "The force stack is evaluated in a\nserial fashion",
+        "uiGraphPos" : "{\"x\":-269.5579528808594,\"y\":276.8111572265625}",
+        "uiCommentExpanded" : "true"
+        },
+      "name" : "Push_3",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "array"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "element"
+          }
+        ],
+      "executable" : "Fabric.Core.Array.Push",
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      },
+    {
       "objectType" : "Set",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":998.5202026367188,\"y\":423.9400634765625}"
+        "uiGraphPos" : "{\"x\":1452.324096679688,\"y\":406.5050964355469}"
         },
-      "name" : "set",
+      "name" : "set_2",
       "ports" : [
         {
           "objectType" : "SetPort",
@@ -422,7 +535,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-317.12158203125,\"y\":798.8040771484375}"
+        "uiGraphPos" : "{\"x\":2470.656005859375,\"y\":426.8671875}"
         },
       "name" : "DrawPolygonMesh_1",
       "ports" : [
@@ -469,6 +582,9 @@
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Boolean" : false
+            },
           "name" : "wireFrame"
           },
         {
@@ -493,7 +609,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-621.0962524414062,\"y\":816.0885009765625}"
+        "uiGraphPos" : "{\"x\":2189.09716796875,\"y\":469.3258666992188}"
         },
       "name" : "EmptyDrawingHandle_1",
       "ports" : [
@@ -509,14 +625,41 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-664.5337524414062,\"y\":208.5633544921875}"
+        "uiComment" : "Initialise the cloth sim, this loads in the forces and constraints into a stack, \nand lets you choose which integrator to use.",
+        "uiGraphPos" : "{\"x\":42.19449615478516,\"y\":341.0433044433594}",
+        "uiCommentExpanded" : "true"
         },
-      "name" : "GravityForce_1",
+      "name" : "ClothSimulation_1",
       "ports" : [
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
-          "name" : "g"
+          "name" : "mesh"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "forceStack"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "constraintStack"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "integrator"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "rows"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "cols"
           },
         {
           "objectType" : "InstPort",
@@ -524,30 +667,20 @@
           "name" : "result"
           }
         ],
-      "executable" : "SoftbodyDynamics.GravityForce.GravityForce",
-      "presetGUID" : "2981E236411798C5DC63D2B2CD74DEA6"
+      "executable" : "SoftbodyDynamics.ClothSimulation.ClothSimulation",
+      "presetGUID" : "3FE3FA9CE9EB3CB5C59C831B87E57F86"
       },
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-671.2904052734375,\"y\":289.6109619140625}"
+        "uiGraphPos" : "{\"x\":1852.427856445312,\"y\":592.5004272460938}"
         },
-      "name" : "TurbulentForce_1",
+      "name" : "GetMesh_1",
       "ports" : [
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
-          "name" : "center"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "amplitude"
-          },
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
-          "name" : "frequency"
+          "name" : "this"
           },
         {
           "objectType" : "InstPort",
@@ -555,29 +688,67 @@
           "name" : "result"
           }
         ],
-      "executable" : "SoftbodyDynamics.TurbulentForce.TurbulentForce",
-      "presetGUID" : "5346D5E587B1DDD5A374E2E48D60B4DB"
+      "executable" : "SoftbodyDynamics.ClothSimulation.GetMesh",
+      "presetGUID" : "ED27EAA6B3DF39B9478453FDCC8DAAA5"
       },
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-384.1963500976562,\"y\":267.2532958984375}"
+        "uiGraphPos" : "{\"x\":2028.04736328125,\"y\":615.85791015625}"
         },
-      "name" : "Push_2",
+      "name" : "RecomputeNormals_1",
       "ports" : [
         {
           "objectType" : "InstPort",
-          "nodePortType" : "IO",
-          "name" : "array"
+          "nodePortType" : "In",
+          "name" : "mesh"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
-          "name" : "element"
+          "name" : "hardAngleDegrees"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
           }
         ],
-      "executable" : "Fabric.Core.Array.Push",
-      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      "executable" : "Fabric.Compounds.PolygonMesh.Modify.RecomputeNormals",
+      "presetGUID" : "E469FC93B78CAC1D85111F400E87968E"
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Setup Simulation",
+        "uiGraphPos" : "{\"x\":-734.2493286132812,\"y\":121.718017578125}",
+        "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
+        "uiTextColor" : "{\n  \"r\" : 255,\n  \"g\" : 255,\n  \"b\" : 255\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 170,\n  \"g\" : 0,\n  \"b\" : 0\n  }",
+        "uiGraphSize" : "{\"w\":1026.764038085938,\"h\":516.4759521484375}"
+        },
+      "name" : "backDrop_3",
+      "ports" : []
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Draw",
+        "uiGraphPos" : "{\"x\":1777.948120117188,\"y\":345.48388671875}",
+        "uiGraphSize" : "{\"w\":943.6490478515625,\"h\":469.3814697265625}"
+        },
+      "name" : "backDrop_4",
+      "ports" : []
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "Update",
+        "uiGraphPos" : "{\"x\":1151.744506835938,\"y\":340.7062072753906}",
+        "uiGraphSize" : "{\"w\":450.5994567871094,\"h\":163.2008514404297}"
+        },
+      "name" : "backDrop_5",
+      "ports" : []
       }
     ],
   "connections" : {
@@ -592,8 +763,11 @@
       "GetPlane_1.lengthSections",
       "ClothSimulation_1.cols"
       ],
+    "StepSimulation_1.this" : [
+      "set_2.value"
+      ],
     "If_1.result" : [
-      "set.value"
+      "StepSimulation_1.this"
       ],
     "Le_1.result" : [
       "If_1.cond"
@@ -602,14 +776,10 @@
       "Transform_1.mesh"
       ],
     "Transform_1.result" : [
-      "DrawPolygonMesh_1.mesh",
       "ClothSimulation_1.mesh"
       ],
     "XfoFromSRT_1.result" : [
       "Transform_1.xfo"
-      ],
-    "ClothSimulation_1.result" : [
-      "If_1.if_true"
       ],
     "VerletIntergrator_1.result" : [
       "ClothSimulation_1.integrator"
@@ -623,20 +793,36 @@
     "get.value" : [
       "If_1.if_false"
       ],
-    "set.value" : [
-      "StepSimulation_1.this"
+    "GravityForce_1.result" : [
+      "Push_2.element"
       ],
-    "DrawPolygonMesh_1.instance" : [
-      "instance"
+    "TurbulentForce_1.result" : [
+      "Push_3.element"
+      ],
+    "Push_2.array" : [
+      "Push_3.array"
+      ],
+    "Push_3.array" : [
+      "ClothSimulation_1.forceStack"
+      ],
+    "set_2.value" : [
+      "value",
+      "GetMesh_1.this"
+      ],
+    "DrawPolygonMesh_1.this" : [
+      "this"
       ],
     "EmptyDrawingHandle_1.handle" : [
       "DrawPolygonMesh_1.this"
       ],
-    "GravityForce_1.result" : [
-      "Push_2.element"
+    "ClothSimulation_1.result" : [
+      "If_1.if_true"
       ],
-    "Push_2.array" : [
-      "ClothSimulation_1.forceStack"
+    "GetMesh_1.result" : [
+      "RecomputeNormals_1.mesh"
+      ],
+    "RecomputeNormals_1.result" : [
+      "DrawPolygonMesh_1.mesh"
       ]
     },
   "requiredPresets" : {
@@ -1708,77 +1894,6 @@ dfgEntry {
 }
 "
       },
-    "SoftbodyDynamics.ClothSimulation.ClothSimulation" : {
-      "objectType" : "Func",
-      "metadata" : {
-        "uiTooltip" : "* Constructor initializes the cloth constraints based on the topology of the PolygonMesh.\n* Quad based meshes will work best.\n*\n* \\param _mesh will be used to initialize the constraint setup of the cloth.\n\nInitialise attribuets\nPin the cloth at these points for testing\nthis.constraints.resize(0);\n\nSupported types:\n  _mesh: PolygonMesh\n  _forceStack: BaseForce[]\n  _constraintStack: BaseConstraint[]\n  _integrator: BaseIntegrator\n  _rows: UInt32\n  _cols: UInt32\n  result: ClothSimulation\n"
-        },
-      "title" : "ClothSimulation",
-      "ports" : [
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "mesh",
-          "execPortType" : "In",
-          "typeSpec" : "PolygonMesh"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "forceStack",
-          "execPortType" : "In",
-          "typeSpec" : "BaseForce[]"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "constraintStack",
-          "execPortType" : "In",
-          "typeSpec" : "BaseConstraint[]"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "integrator",
-          "execPortType" : "In",
-          "typeSpec" : "BaseIntegrator"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "rows",
-          "execPortType" : "In",
-          "typeSpec" : "UInt32"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "cols",
-          "execPortType" : "In",
-          "typeSpec" : "UInt32"
-          },
-        {
-          "objectType" : "Port",
-          "metadata" : {
-            "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
-            },
-          "nodePortType" : "In",
-          "name" : "result",
-          "execPortType" : "Out",
-          "typeSpec" : "ClothSimulation"
-          }
-        ],
-      "extDeps" : {
-        "ClothSimulation" : "*"
-        },
-      "presetGUID" : "3FE3FA9CE9EB3CB5C59C831B87E57F86",
-      "code" : "require ClothSimulation;
-
-dfgEntry {
-  result = ClothSimulation(mesh, forceStack, constraintStack, integrator, rows, cols);
-}
-"
-      },
     "SoftbodyDynamics.VerletIntergrator.VerletIntergrator" : {
       "objectType" : "Func",
       "metadata" : {
@@ -1855,6 +1970,86 @@ dfgEntry {
       "code" : "
 dfgEntry {
 	array.push(element);
+}
+"
+      },
+    "SoftbodyDynamics.GravityForce.GravityForce" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  _g: Vec3\n  result: GravityForce\n"
+        },
+      "title" : "GravityForce",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "g",
+          "execPortType" : "In",
+          "typeSpec" : "Vec3"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "GravityForce"
+          }
+        ],
+      "extDeps" : {
+        "ClothSimulation" : "*"
+        },
+      "presetGUID" : "2981E236411798C5DC63D2B2CD74DEA6",
+      "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = GravityForce(g);
+}
+"
+      },
+    "SoftbodyDynamics.TurbulentForce.TurbulentForce" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  _center: Vec3\n  _amplitude: Float32\n  _frequency: Vec3\n  result: TurbulentForce\n"
+        },
+      "title" : "TurbulentForce",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "center",
+          "execPortType" : "In",
+          "typeSpec" : "Vec3"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "amplitude",
+          "execPortType" : "In",
+          "typeSpec" : "Float32"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "frequency",
+          "execPortType" : "In",
+          "typeSpec" : "Vec3"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "TurbulentForce"
+          }
+        ],
+      "extDeps" : {
+        "ClothSimulation" : "*"
+        },
+      "presetGUID" : "5346D5E587B1DDD5A374E2E48D60B4DB",
+      "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = TurbulentForce(center, amplitude, frequency);
 }
 "
       },
@@ -2121,83 +2316,325 @@ dfgEntry {
 }
 "
       },
-    "SoftbodyDynamics.GravityForce.GravityForce" : {
+    "SoftbodyDynamics.ClothSimulation.ClothSimulation" : {
       "objectType" : "Func",
       "metadata" : {
-        "uiTooltip" : "Supported types:\n  _g: Vec3\n  result: GravityForce\n"
+        "uiTooltip" : "* Constructor initializes the cloth constraints based on the topology of the PolygonMesh.\n* Quad based meshes will work best.\n*\n* \\param _mesh will be used to initialize the constraint setup of the cloth.\n\ngetAttributes();\nInitialise attributes\nPin the cloth at these points for testing\nfor (Index row = 0; _rows <= adjRows; ++row)\n{\nmovable.values[_rows * (adjCols + 1)] = true;\n}\nthis.setupAttribs();\nthis.constraints.resize(0);\n\nSupported types:\n  _mesh: PolygonMesh\n  _forceStack: BaseForce[]\n  _constraintStack: BaseConstraint[]\n  _integrator: BaseIntegrator\n  _rows: UInt32\n  _cols: UInt32\n  result: ClothSimulation\n"
         },
-      "title" : "GravityForce",
+      "title" : "ClothSimulation",
       "ports" : [
         {
           "objectType" : "Port",
           "nodePortType" : "Out",
-          "name" : "g",
+          "name" : "mesh",
           "execPortType" : "In",
-          "typeSpec" : "Vec3"
+          "typeSpec" : "PolygonMesh"
           },
         {
           "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "forceStack",
+          "execPortType" : "In",
+          "typeSpec" : "BaseForce[]"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "constraintStack",
+          "execPortType" : "In",
+          "typeSpec" : "BaseConstraint[]"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "integrator",
+          "execPortType" : "In",
+          "typeSpec" : "BaseIntegrator"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "rows",
+          "execPortType" : "In",
+          "typeSpec" : "UInt32"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "cols",
+          "execPortType" : "In",
+          "typeSpec" : "UInt32"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+            },
           "nodePortType" : "In",
           "name" : "result",
           "execPortType" : "Out",
-          "typeSpec" : "GravityForce"
+          "typeSpec" : "ClothSimulation"
           }
         ],
       "extDeps" : {
         "ClothSimulation" : "*"
         },
-      "presetGUID" : "2981E236411798C5DC63D2B2CD74DEA6",
+      "presetGUID" : "3FE3FA9CE9EB3CB5C59C831B87E57F86",
       "code" : "require ClothSimulation;
 
 dfgEntry {
-  result = GravityForce(g);
+  result = ClothSimulation(mesh, forceStack, constraintStack, integrator, rows, cols);
 }
 "
       },
-    "SoftbodyDynamics.TurbulentForce.TurbulentForce" : {
+    "SoftbodyDynamics.ClothSimulation.GetMesh" : {
       "objectType" : "Func",
       "metadata" : {
-        "uiTooltip" : "Supported types:\n  _center: Vec3\n  _amplitude: Float32\n  _frequency: Vec3\n  result: TurbulentForce\n"
+        "uiTooltip" : "Supported types:\n  this: ClothSimulation\n  result: PolygonMesh\n"
         },
-      "title" : "TurbulentForce",
+      "title" : "GetMesh",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "this",
+          "execPortType" : "In",
+          "typeSpec" : "ClothSimulation"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+            },
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "PolygonMesh"
+          }
+        ],
+      "extDeps" : {
+        "ClothSimulation" : "*"
+        },
+      "presetGUID" : "ED27EAA6B3DF39B9478453FDCC8DAAA5",
+      "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = this.getMesh();
+}
+"
+      },
+    "Fabric.Compounds.PolygonMesh.Modify.RecomputeNormals" : {
+      "objectType" : "Graph",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 120,\n  \"g\" : 130,\n  \"b\" : 144\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 88,\n  \"g\" : 92,\n  \"b\" : 110\n  }",
+        "uiTooltip" : "Recomputes the vertex normals."
+        },
+      "title" : "RecomputeNormals",
       "ports" : [
         {
           "objectType" : "Port",
           "nodePortType" : "Out",
-          "name" : "center",
+          "name" : "mesh",
           "execPortType" : "In",
-          "typeSpec" : "Vec3"
+          "typeSpec" : "PolygonMesh"
           },
         {
           "objectType" : "Port",
+          "metadata" : {
+            "uiRange" : "(0, 180)"
+            },
           "nodePortType" : "Out",
-          "name" : "amplitude",
+          "defaultValues" : {
+            "Float32" : 60
+            },
+          "name" : "hardAngleDegrees",
           "execPortType" : "In",
-          "typeSpec" : "Float32"
-          },
-        {
-          "objectType" : "Port",
-          "nodePortType" : "Out",
-          "name" : "frequency",
-          "execPortType" : "In",
-          "typeSpec" : "Vec3"
+          "typeSpec" : "Scalar"
           },
         {
           "objectType" : "Port",
           "nodePortType" : "In",
           "name" : "result",
           "execPortType" : "Out",
-          "typeSpec" : "TurbulentForce"
+          "typeSpec" : "PolygonMesh"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "E469FC93B78CAC1D85111F400E87968E",
+      "nodes" : [
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 531, \"y\": 146}"
+            },
+          "name" : "RecomputePointNormals",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "IO",
+              "name" : "this"
+              },
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "In",
+              "name" : "hardAngleRadians"
+              }
+            ],
+          "executable" : "Fabric.Exts.Geometry.PolygonMesh.RecomputePointNormals",
+          "presetGUID" : "82B0904C5BAB58BDA9ED038FB18E0629"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 779, \"y\": 175}"
+            },
+          "name" : "Cache",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "In",
+              "name" : "value"
+              }
+            ],
+          "executable" : "Fabric.Core.Data.Cache",
+          "presetGUID" : "D903AFD981FE9214C69943F542D5FD60"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 302, \"y\": 108}"
+            },
+          "name" : "ClonePolygonMesh",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "In",
+              "name" : "value"
+              },
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "Out",
+              "name" : "result"
+              }
+            ],
+          "executable" : "Fabric.Exts.Geometry.PolygonMesh.ClonePolygonMesh",
+          "presetGUID" : "8480EBBD95E54A412E1471D01B474BA2"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 314, \"y\": 225}"
+            },
+          "name" : "MathDegToRad",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "In",
+              "name" : "val"
+              },
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "Out",
+              "name" : "result"
+              }
+            ],
+          "executable" : "Fabric.Exts.Math.Func.Math_degToRad",
+          "presetGUID" : "6BC97C4D61BFC82DBF0660BAD1104520"
+          }
+        ],
+      "connections" : {
+        "mesh" : [
+          "ClonePolygonMesh.value"
+          ],
+        "hardAngleDegrees" : [
+          "MathDegToRad.val"
+          ],
+        "RecomputePointNormals.this" : [
+          "Cache.value"
+          ],
+        "Cache.value" : [
+          "result"
+          ],
+        "ClonePolygonMesh.result" : [
+          "RecomputePointNormals.this"
+          ],
+        "MathDegToRad.result" : [
+          "RecomputePointNormals.hardAngleRadians"
+          ]
+        }
+      },
+    "Fabric.Exts.Geometry.PolygonMesh.RecomputePointNormals" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Geometry/PolygonMesh.html",
+        "uiTooltip" : "Recomputes all point normals and introduces normal splits if adjacent polygons' normals differ by more than `hardAngleRadians` radians.\nAll previously stored point normals will be overwritten.\nThe computed normal value is the average of neighbor polygons' :kl-ref:`PolygonMesh.generatePolygonNormal` (or a subset of these if there is a split).\n\n Supported by PolygonMesh"
+        },
+      "title" : "RecomputePointNormals",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+            },
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "PolygonMesh"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "hardAngleRadians",
+          "execPortType" : "In",
+          "typeSpec" : "Scalar"
           }
         ],
       "extDeps" : {
-        "ClothSimulation" : "*"
+        "Geometry" : "*"
         },
-      "presetGUID" : "5346D5E587B1DDD5A374E2E48D60B4DB",
-      "code" : "require ClothSimulation;
+      "presetGUID" : "82B0904C5BAB58BDA9ED038FB18E0629",
+      "code" : "require Geometry;
 
 dfgEntry {
-  result = TurbulentForce(center, amplitude, frequency);
+  this.recomputePointNormals(hardAngleRadians);
+}
+"
+      },
+    "Fabric.Exts.Math.Func.Math_degToRad" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 99,\n  \"g\" : 129,\n  \"b\" : 92\n  }",
+        "uiTooltip" : "Converts degrees to radians\n\n Supported by Scalar"
+        },
+      "title" : "Math_degToRad",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "val",
+          "execPortType" : "In",
+          "typeSpec" : "Scalar"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Scalar"
+          }
+        ],
+      "extDeps" : {
+        "Math" : "*"
+        },
+      "presetGUID" : "6BC97C4D61BFC82DBF0660BAD1104520",
+      "code" : "require Math;
+
+dfgEntry {
+  result = Math_degToRad(val);
 }
 "
       }
@@ -2209,16 +2646,30 @@ dfgEntry {
       },
     {
       "type" : "UInt32",
-      "value" : null
+      "value" : 30
       },
     {
       "type" : "UInt32",
-      "value" : null
+      "value" : 30
       },
     {
-      "type" : "InlineInstance",
+      "type" : "ClothSimulation",
+      "value" : null,
+      "ext" : "ClothSimulation"
+      },
+    {
+      "type" : "Vec3[]",
+      "value" : null,
+      "ext" : "Math"
+      },
+    {
+      "type" : "DrawingHandle",
       "value" : null,
       "ext" : "InlineDrawing"
+      },
+    {
+      "type" : "Boolean",
+      "value" : true
       }
     ]
   }

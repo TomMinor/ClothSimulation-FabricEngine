@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: TurbulentForce\n  attrs: GeometryAttributes\n"
+    "uiTooltip" : "Supported types:\n  this: TurbulentForce\n  attrs: Ref<GeometryAttributes>\n"
     },
   "title" : "Apply",
   "ports" : [
@@ -27,11 +27,12 @@
   "extDeps" : {
     "ClothSimulation" : "*"
     },
-  "presetGUID" : "4B500E00FE972F73ADB1F8C39D2FB037",
+  "presetGUID" : "D8FDBECAE6F427A1CC9350B1CB19DBF7",
   "code" : "require ClothSimulation;
 
 dfgEntry {
-  this.apply(attrs);
+  Ref<GeometryAttributes> attrs_ref = attrs;
+  this.apply(attrs_ref);
 }
 "
   }

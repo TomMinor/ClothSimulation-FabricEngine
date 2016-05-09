@@ -20,7 +20,7 @@ function SpringConstraint()
 {
 }
 
-function SpringConstraint.solve!(io GeometryAttributes attrs, UInt32 _rows, UInt32 _cols)
+function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
 {
 	// adjust the amount of rows and columns.
 	Count adjRows = _rows;

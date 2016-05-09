@@ -19,7 +19,7 @@ function TurbulentForce.initialise!()
 	// Empty
 }
 
-function TurbulentForce.apply!(io GeometryAttributes attrs)
+function TurbulentForce.apply!(io Ref<GeometryAttributes> attrs)
 {
   Ref<Vec3Attribute> positions = attrs.getPositions();
 	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
