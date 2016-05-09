@@ -2,10 +2,17 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "@brief Constructor\n\nSupported types:\n  result: VerletIntergrator\n"
+    "uiTooltip" : "@brief Default Constructor\n\nSupported types:\n  _rate: Float32\n  result: VerletIntergrator\n"
     },
   "title" : "VerletIntergrator",
   "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "rate",
+      "execPortType" : "In",
+      "typeSpec" : "Float32"
+      },
     {
       "objectType" : "Port",
       "nodePortType" : "In",
@@ -17,11 +24,11 @@
   "extDeps" : {
     "ClothSimulation" : "*"
     },
-  "presetGUID" : "E816E2D4AEBA4E07309F2EB05855920C",
+  "presetGUID" : "1283EF3C1403D3E8FC416533F2D987A5",
   "code" : "require ClothSimulation;
 
 dfgEntry {
-  result = VerletIntergrator();
+  result = VerletIntergrator(rate);
 }
 "
   }

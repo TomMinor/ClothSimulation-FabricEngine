@@ -2,10 +2,17 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  result: SpringConstraint\n"
+    "uiTooltip" : "Supported types:\n  _s: Float32\n  result: SpringConstraint\n"
     },
   "title" : "SpringConstraint",
   "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "s",
+      "execPortType" : "In",
+      "typeSpec" : "Float32"
+      },
     {
       "objectType" : "Port",
       "nodePortType" : "In",
@@ -17,11 +24,11 @@
   "extDeps" : {
     "ClothSimulation" : "*"
     },
-  "presetGUID" : "1882CAF0C09670013BE542F2CF05259E",
+  "presetGUID" : "2153E7B0B43C2DD8E889046E1685541E",
   "code" : "require ClothSimulation;
 
 dfgEntry {
-  result = SpringConstraint();
+  result = SpringConstraint(s);
 }
 "
   }

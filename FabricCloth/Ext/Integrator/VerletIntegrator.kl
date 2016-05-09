@@ -10,12 +10,21 @@ object VerletIntergrator : BaseIntegrator
 };
 
 ///
-/// @brief Constructor
+/// @brief Default Constructor
 /// \dfgPresetFolder Integrators
 function VerletIntergrator()
 {
-	this.initialise();
+	this.rate = 0.99; // Apply damping to the velocity
 }
+
+///
+/// @brief Default Constructor
+/// \dfgPresetFolder Integrators
+function VerletIntergrator(Float32 _rate)
+{
+	this.rate = _rate;
+}
+
 
 ///
 /// \dfgPresetFolder Integrators
@@ -23,7 +32,7 @@ function VerletIntergrator()
 ///
 function VerletIntergrator.initialise!()
 {
-	this.rate = 0.99; // Apply damping to the velocity
+	
 }
 
 /// \dfgPresetFolder Integrators

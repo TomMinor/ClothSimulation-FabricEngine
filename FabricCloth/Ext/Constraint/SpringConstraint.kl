@@ -9,15 +9,25 @@ require Geometry;
 ///
 object SpringConstraint : BaseConstraint
 {
-
+	Float32 s;
 };
+
+///
+/// \brief SpringConstraints default ctor
+/// \dfgPresetFolder Constraints
+///
+function SpringConstraint()
+{
+	this.s = 0.5;
+}
 
 ///
 /// \brief SpringConstraints ctor
 /// \dfgPresetFolder Constraints
 ///
-function SpringConstraint()
+function SpringConstraint(Float32 _s)
 {
+	this.s = _s;
 }
 
 /// \internal
@@ -44,7 +54,7 @@ function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows,
 					adjRows,
 					colWidth * colWidth,
 					rowHeight * rowHeight,
-					0.5
+					this.s
 					);
 	velocities.incrementVersion();
 }

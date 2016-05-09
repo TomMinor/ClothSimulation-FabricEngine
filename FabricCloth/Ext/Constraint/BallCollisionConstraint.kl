@@ -1,0 +1,57 @@
+require Geometry;
+
+
+///
+/// \brief Check for collision against a single ball
+///
+/// \dfgPresetFolder Constraints
+///
+object BallCollisionConstraint : BaseConstraint
+{
+	Vec3 position;
+	Float32 radius;
+};
+
+///
+/// \brief SpringConstraints ctor
+/// \dfgPresetFolder Constraints
+///
+function BallCollisionConstraint(in Vec3 _position, Float32 _radius)
+{
+	this.position = _position;
+	this.radius = _radius;
+}
+
+/// \internal
+function BallCollisionConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
+{
+	Ref<Vec3Attribute> positions = attrs.getPositions();
+	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
+
+	satisfyCollision<<<positions.values.size()>>>(
+					positions.values,
+					velocities.values,
+					this.position,
+					this.radius
+					);
+
+	velocities.incrementVersion();
+}
+
+operator satisfyCollision<<<index>>>(
+  io Vec3 positions[],
+  io Vec3 velocities[],
+  Vec3 ballPosition,
+  Float32 ballRadius
+  )
+{
+	Vec3 v = positions[index] - ballPosition;
+	Float32 l = v.length();
+	if( l < ballRadius )
+	{
+		v = v.normalize();
+		Vec3 offset = v * (ballRadius - l);
+
+		positions[index] += offset;
+	}
+}
