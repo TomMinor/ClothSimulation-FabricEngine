@@ -1,0 +1,45 @@
+require Geometry;
+
+interface BaseForce;
+
+object GravityForce : BaseForce
+{
+	Vec3 g;
+};
+
+function GravityForce( Vec3 _g )
+{
+	g = _g;
+}
+
+function GravityForce( )
+{
+	g = Vec3(0, 9.8, 0);
+}
+
+function GravityForce.initialise!()
+{
+	// Empty
+}
+
+function GravityForce.apply!(in GeometryAttributes attrs)
+{
+	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
+  	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');
+  	// Update in parallel
+  	satisfy<<<velocities.values.size()>>>(velocities.values, movable.values, g );
+	v.incrementVersion();
+}
+
+operator apply<<<index>>>( 
+				io Vec3 velocities[],
+  				Integer movable[],
+  				Float32 g
+  				)
+{
+	// Pin immovable vertices
+  	if ( !movable[index] )
+	{
+		velocities[index] += Vec3(0.0, -g, 0.0);
+	}
+}

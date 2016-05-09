@@ -1,0 +1,6 @@
+require Geometry;
+
+interface ConstraintInterface
+{
+	 solve(io Vec3 a, io Vec3 b);
+};
