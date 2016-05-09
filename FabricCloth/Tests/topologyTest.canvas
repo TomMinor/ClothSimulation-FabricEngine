@@ -2,15 +2,15 @@
   "objectType" : "Graph",
   "metadata" : {
     "timeline_timerFps" : "1000",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.795384407043457,\n    \"y\" : -0.1148570254445076,\n    \"z\" : 0.5952920913696289,\n    \"t\" : 1.681370854377747\n    },\n  \"row1\" : {\n    \"x\" : -6.817992357355251e-07,\n    \"y\" : 0.981850802898407,\n    \"z\" : 0.189490407705307,\n    \"t\" : 0.3278167843818665\n    },\n  \"row2\" : {\n    \"x\" : -0.6062780618667603,\n    \"y\" : 0.150681346654892,\n    \"z\" : -0.780971884727478,\n    \"t\" : -2.802934408187866\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.04258821532130241,\n    \"y\" : 0.9968526363372803,\n    \"z\" : 0.0667337030172348,\n    \"t\" : 1.120988130569458\n    },\n  \"row1\" : {\n    \"x\" : 1.401273379997292e-06,\n    \"y\" : -0.0667702704668045,\n    \"z\" : 0.9981177449226379,\n    \"t\" : 16.82971000671387\n    },\n  \"row2\" : {\n    \"x\" : 0.9994961023330688,\n    \"y\" : 0.04247545450925827,\n    \"z\" : 0.00284187076613307,\n    \"t\" : 0.1451902389526367\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "timeline_loopMode" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.7303237318992615\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.4592597782611847\n  }",
     "timeline_simMode" : "0",
-    "camera_focalDistance" : "3.687560081481934",
+    "camera_focalDistance" : "14.92013835906982",
     "timeline_current" : "1",
     "timeline_end" : "50",
-    "uiGraphPan" : "{\n  \"x\" : 1295.620215325944,\n  \"y\" : 55.66878041618408\n  }"
+    "uiGraphPan" : "{\n  \"x\" : 576.310053243893,\n  \"y\" : 76.74025064252511\n  }"
     },
   "title" : "",
   "ports" : [
@@ -92,7 +92,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-1262.968872070312,\"y\":-69.50648498535156}"
+        "uiGraphPos" : "{\"x\":-1074.328369140625,\"y\":80.86356353759766}"
         },
       "name" : "GetPlane_1",
       "ports" : [
@@ -109,13 +109,16 @@
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 11.72999954223633
+            },
           "name" : "width"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Size" : 8
+            "Size" : 3
             },
           "name" : "lengthSections"
           },
@@ -123,7 +126,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Size" : 8
+            "Size" : 3
             },
           "name" : "widthSections"
           }
@@ -134,7 +137,8 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-508.0792236328125,\"y\":46.31759643554688}"
+        "uiGraphPos" : "{\"x\":-508.1050109863281,\"y\":50.61684036254883}",
+        "uiCollapsedState" : "0"
         },
       "name" : "topology",
       "ports" : [
@@ -151,7 +155,37 @@
         {
           "objectType" : "InstPort",
           "nodePortType" : "Out",
-          "name" : "neighbourPoints"
+          "name" : "debugDrawPoints"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Float32" : 0.1000000014901161
+            },
+          "name" : "a"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Float32" : 2.099999904632568
+            },
+          "name" : "b"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "c"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Size" : 1,
+            "SInt32" : 6
+            },
+          "name" : "idx"
           }
         ],
       "definition" : {
@@ -175,68 +209,97 @@
           {
             "objectType" : "Port",
             "nodePortType" : "In",
-            "name" : "neighbourPoints",
+            "name" : "debugDrawPoints",
             "execPortType" : "Out",
             "typeSpec" : "Size[]"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "a",
+            "execPortType" : "In",
+            "typeSpec" : "Float32"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "b",
+            "execPortType" : "In",
+            "typeSpec" : "Float32"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "c",
+            "execPortType" : "In",
+            "typeSpec" : "Float32"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "idx",
+            "execPortType" : "In",
+            "typeSpec" : "SInt32"
             }
           ],
         "extDeps" : {},
         "code" : "require Geometry;
 
+function setupConstraints(io PolygonMesh mesh, in Size index, io Lines constraints[8], in Float32 a, in Float32 b, in Float32 c)
+{
+  Vec3 thisPointPosition = mesh.getPointPosition(index);
+  
+    // Query directly connected points (not points connected by face)
+    LocalL16UInt32Array neighbourPoints;
+    mesh.getPointSurroundingPoints(index, false, neighbourPoints);
+    
+    // Iterate over all the connected points and generate 
+    for (Size i = 0; i < neighbourPoints.size(); ++i)
+    {
+        Size neighbourIndex = neighbourPoints.get(i);
+        Vec3 neighbourPointPosition = mesh.getPointPosition( neighbourIndex );
+  
+        // Structural Constraint
+        constraints[ 0].addLine(thisPointPosition + Vec3(0, a, 0), neighbourPointPosition + Vec3(0, a, 0));
+      
+        // Query the connected points of this neighbour
+        LocalL16UInt32Array neighbourNeighbourPoints;
+        mesh.getPointSurroundingPoints(neighbourIndex, false, neighbourNeighbourPoints);
+        
+        // Build the bend constraints
+        for(Index j = 0; j < neighbourNeighbourPoints.size(); j++)
+        {
+          Index neighbourNeighbourIndex = neighbourNeighbourPoints.get(j);
+          if(neighbourNeighbourIndex != index)
+          {
+            Vec3 neighbourNeighbourPointPosition = mesh.getPointPosition( neighbourNeighbourIndex );
+            constraints[4].addLine(neighbourPointPosition + Vec3(0, b, 0), neighbourNeighbourPointPosition + Vec3(0, b, 0));
+          }
+        }
+    }
+}
+
 dfgEntry 
 {
   Vec3 points[] = mesh.getAllPointPositions();
-//  PolygonMeshTopology topology = mesh.topology;
 
-  //constraints = Lines[8];
+  // Initialize the constraint arrays
   for(Index i = 0; i < 8; ++i)
   {
     constraints[i] = Lines();
   }
   
-  for(Index index = 0; index < mesh.pointCount(); index++)
-  {
-    LocalL16UInt32Array surroundingPointsTmp;
-    mesh.getPointSurroundingPoints(index, false, surroundingPointsTmp);
-  
-    Vec3 pointPos = mesh.getPointPosition(index);
-    for (Index i = 0; i < surroundingPointsTmp.size(); ++i)
+  if(idx > -1) {
+    setupConstraints(mesh, idx, constraints, a, b, c);
+  } else {
+      // Iterate over all the mesh points and generate constraints (structural, shear, bending)
+    for(Size index = 0; index < mesh.pointCount(); index++)
     {
-        Index thisVtxIdx = surroundingPointsTmp.get(i);
-        Vec3 thisPos = mesh.getPointPosition( thisVtxIdx );
-        constraints[0].addLine(pointPos, thisPos);
-      
-        LocalL16UInt32Array surroundingPointsTmp2;
-        mesh.getPointSurroundingPoints(thisVtxIdx, false, surroundingPointsTmp2);
-        for(Index j = 0; j < surroundingPointsTmp2.size(); j++)
-        {
-          Index thisVtxIdx2 = surroundingPointsTmp2.get(j);
-          if(thisVtxIdx2 != index)
-          {
-            Vec3 thisPos2 = mesh.getPointPosition( thisVtxIdx2 );
-            constraints[4].addLine(pointPos, thisPos2);
-          }
-        }
+      setupConstraints(mesh, index, constraints, a, b, c);
     }
   }
   
 
-/*
-  //for(Index i = 0; i < points.size; i++)
-  {
-      Vec3 pointPos = mesh.getPointPosition(index);
-      
-      LocalL16UInt32Array neighbours;
-      mesh.getPointSurroundingPoints(index, false, neighbours);
-      report(\"Vtx[\" + index + \"] > \" + neighbours.getString() );
-      for(Index j = 0; j < neighbours.size(); j++)
-      {
-        Vec3 thisPos = mesh.getPointPosition(j);
-        constraints[0].addLine(pointPos + Vec3(0,1,0), thisPos + Vec3(0,1,0));
-        //report( neighbours[i].getString() );
-      }
-  }*/
-  report(\"\");
 }
 "
         }
@@ -260,7 +323,7 @@ dfgEntry
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1555.868286132812,\"y\":-100.6645736694336}"
+        "uiGraphPos" : "{\"x\":1557.568359375,\"y\":-98.96456146240234}"
         },
       "name" : "DrawPolygonMesh_1",
       "ports" : [
@@ -2275,7 +2338,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":955.8242797851562,\"y\":440.1595764160156}"
+        "uiGraphPos" : "{\"x\":929.5357055664062,\"y\":356.6544799804688}"
         },
       "name" : "Color_1",
       "ports" : [
@@ -2664,7 +2727,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-1244.116333007812,\"y\":86.71349334716797}"
+        "uiGraphPos" : "{\"x\":-1139.339721679688,\"y\":272.1972045898438}"
         },
       "name" : "LoadAlembic_1",
       "ports" : [
@@ -2698,7 +2761,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-936.206787109375,\"y\":34.15017700195312}"
+        "uiGraphPos" : "{\"x\":-916.6937866210938,\"y\":-55.75628662109375}"
         },
       "name" : "GetTeapot_1",
       "ports" : [
@@ -2710,13 +2773,16 @@ dfgEntry {
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
+          "defaultValues" : {
+            "Scalar" : 1.059999942779541
+            },
           "name" : "size"
           },
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Integer" : 2
+            "Integer" : 4
             },
           "name" : "detail"
           }
@@ -2726,6 +2792,9 @@ dfgEntry {
       }
     ],
   "connections" : {
+    "GetPlane_1.value" : [
+      "Clone_1.value"
+      ],
     "topology.mesh" : [
       "DrawPolygonMesh_1.mesh",
       "GetOrCreateColorAttribute_1.this"
@@ -2797,9 +2866,6 @@ dfgEntry {
     "GetOrCreateColorAttribute_1.this" : [
       "DebugPolygonMesh_2.mesh",
       "GetPointSurroundingPoints.this"
-      ],
-    "GetTeapot_1.mesh" : [
-      "Clone_1.value"
       ]
     },
   "requiredPresets" : {
