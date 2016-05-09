@@ -1,0 +1,51 @@
+require Geometry;
+
+///
+/// @briefImplements verlet integration to calculate particle movement
+/// \dfgPresetFolder Integrators
+///
+object VerletIntergrator : BaseIntegrator
+{
+	Float32 rate;
+};
+
+///
+/// @brief Constructor
+/// \dfgPresetFolder Integrators
+function VerletIntergrator()
+{
+	this.initialise();
+}
+
+///
+/// \dfgPresetFolder Integrators
+/// \internal
+///
+function VerletIntergrator.initialise!()
+{
+	this.rate = 0.99; // Apply damping to the velocity
+}
+
+/// \dfgPresetFolder Integrators
+/// \internal
+function VerletIntergrator.apply!(io Ref<GeometryAttributes> attributes)
+{
+	Ref<Vec3Attribute> positions = attributes.getPositions();
+	Ref<Vec3Attribute> velocities = attributes.getOrCreateVec3Attribute('velocities');
+	integrate<<<positions.values.size()>>>(	positions.values,
+						velocities.values,
+						this.rate
+						);
+	positions.incrementVersion();
+	velocities.incrementVersion();
+}
+
+operator integrate<<<index>>>(
+  io Vec3 positions[],
+  io Vec3 velocities[],
+  Float32 rate
+  )
+{
+  positions[index] += rate * velocities[index];
+  velocities[index] *= 0.99;
+}

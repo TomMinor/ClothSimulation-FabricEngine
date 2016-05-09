@@ -1,25 +1,32 @@
 require Geometry;
 
+/// \dfgPresetFolder  Forces
 object GravityForce : BaseForce
 {
 	Vec3 g;
 };
 
+/// \dfgPresetFolder Forces
 function GravityForce( Vec3 _g )
 {
 	this.g = _g;
 }
 
+/// \dfgPresetFolder Forces
 function GravityForce( )
 {
 	this.g = Vec3(0, 9.8, 0);
 }
 
+/// \dfgPresetFolder Forces
+/// \internal
 function GravityForce.initialise!()
 {
 	// Empty
 }
 
+/// \dfgPresetFolder Forces
+/// \internal
 function GravityForce.apply!(io Ref<GeometryAttributes> attrs)
 {
 	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
@@ -32,6 +39,15 @@ function GravityForce.apply!(io Ref<GeometryAttributes> attrs)
 	velocities.incrementVersion();
 }
 
+/**
+ * @brief      Apply a constant force in the direction of g in parallel
+ *
+ * @param      index       Point index
+ * @param      velocities  Velocities list
+ * @param      movable     Movable points list
+ * @param      g           Gravity force
+ *
+ */
 operator applyGravity<<<index>>>( 
 				io Vec3 velocities[],
   				Integer movable[],

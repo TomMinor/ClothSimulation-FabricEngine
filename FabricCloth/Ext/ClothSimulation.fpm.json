@@ -1,10 +1,16 @@
 {
   "code": [
+  // Interfaces
+  "Force/InterfaceForce.kl",
+  "Integrator/IntegratorInterface.kl",
+  "Constraint/BaseConstraint.kl",
+  // Implementation
+  "Integrator/VerletIntegrator.kl",
+  "Constraint/SpringConstraint.kl",
+  "Force/GravityForce.kl",
+  "Force/TurbulentForce.kl",
+
   "Particle/Particle.kl",
-   "Constraint/SpringConstraint.kl",
-   "Force/GravityForce.kl",
-   "Force/InterfaceForce.kl",
-   "Force/TurbulentForce.kl",
   ]
 
   "dfgPresets": {

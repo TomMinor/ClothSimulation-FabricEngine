@@ -1,0 +1,16 @@
+require Geometry;
+
+///
+///Interface for all constraints
+///
+/// \dfgPresetOmit
+/// \dfgPresetFolder Constraints
+///
+interface BaseConstraint
+{
+	/// 
+	/// \internal
+	/// Grid is hardcoded now, so all the solvers need to have rows/columns passed in
+	/// Once I've sorted out proper constraint calculations I'll have to pass something elese in
+	solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols);
+};

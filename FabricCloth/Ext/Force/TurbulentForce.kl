@@ -1,5 +1,6 @@
 require Geometry;
 
+/// \dfgPresetFolder  Forces
 object TurbulentForce : BaseForce
 {
 	Vec3 center;
@@ -7,18 +8,24 @@ object TurbulentForce : BaseForce
 	Vec3 frequency;
 };
 
+/// \dfgPresetFolder Forces
 function TurbulentForce( Vec3 _center, Float32 _amplitude, Vec3 _frequency )
 {
+  // todo calculate center based on time
 	this.center = _center;
 	this.amplitude = _amplitude;
 	this.frequency = _frequency;
 }
 
+/// \dfgPresetFolder Forces
+/// \internal
 function TurbulentForce.initialise!()
 {
 	// Empty
 }
 
+/// \dfgPresetFolder Forces
+/// \internal
 function TurbulentForce.apply!(io Ref<GeometryAttributes> attrs)
 {
   Ref<Vec3Attribute> positions = attrs.getPositions();

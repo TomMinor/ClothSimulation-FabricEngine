@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ClothSimulation\n"
+    "uiTooltip" : "* @brief      Steps the simulation forward in time by evaluating the chosen integrator to calculate particle movement.\n\n\nGeometryAttributes attrs = this.mesh.getAttributes();\nSolve constraints\nSolve forces\nIntegrate\nVec3 pos[] = this.attrs.getPositions().values;\nreport( pos[5] );\n\nSupported types:\n  this: ClothSimulation\n"
     },
   "title" : "StepSimulation",
   "ports" : [

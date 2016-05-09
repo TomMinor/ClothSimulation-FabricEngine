@@ -1,80 +1,11 @@
 require Math;
 require Geometry;
 
-
-
-interface BaseForce
-{
-	initialise!();
-	apply!(io Ref<GeometryAttributes> attributes);
-};
-
-interface BaseIntegrator
-{
-	initialise!();
-	apply!(io Ref<GeometryAttributes> attributes);
-};
-
 /**
- * Interface for all constraints
- * 
- * \dfgPresetOmit
- */
-interface BaseConstraint
-{
-	/// 
-	/// \internal
-	/// Grid is hardcoded now, so all the solvers need to have rows/columns passed in
-	/// Once I've sorted out proper constraint calculations I'll have to pass something elese in
-	solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols);
-};
-
-
-object VerletIntergrator : BaseIntegrator
-{
-	Float32 rate;
-};
-
-function VerletIntergrator()
-{
-	this.initialise();
-}
-
-function VerletIntergrator.initialise!()
-{
-	this.rate = 0.99; // Apply damping to the velocity
-}
-
-function VerletIntergrator.apply!(io Ref<GeometryAttributes> attributes)
-{
-	Ref<Vec3Attribute> positions = attributes.getPositions();
-	Ref<Vec3Attribute> velocities = attributes.getOrCreateVec3Attribute('velocities');
-	integrate<<<positions.values.size()>>>(	positions.values,
-						velocities.values,
-						this.rate
-						);
-	positions.incrementVersion();
-	velocities.incrementVersion();
-}
-
-operator integrate<<<index>>>(
-  io Vec3 positions[],
-  io Vec3 velocities[],
-  Float32 rate
-  )
-{
-  positions[index] += rate * velocities[index];
-  velocities[index] *= 0.99;
-}
-
-
-/**
- * The Cloth object extends the Points functionality with soft body dynamics simulated using constraints. 
+ * @brief The Cloth object extends the Points functionality with soft body dynamics simulated using constraints. 
  * Building 
  * 
  * Per vertex data is stored in GeometryAttributes, such as mass and acceleration.
- * 
- * 
  * 
  */
 object ClothSimulation : Points
@@ -109,6 +40,11 @@ object ClothSimulation : Points
  * Quad based meshes will work best.
  * 
  * \param _mesh will be used to initialize the constraint setup of the cloth.
+ * \param _forceStack holds all the forces to be evaluated every simulation step
+ * \param _constraintStack holds all the constraints to be evaluated every simulation step
+ * \param _integrator is used to evaluate every simulation step
+ * \param _rows
+ * \param _cols
  */
 function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseConstraint _constraintStack[], BaseIntegrator _integrator, UInt32 _rows, UInt32 _cols)
 {
@@ -157,7 +93,7 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
 		movable.values[i] = true;
 	}
 
-	report( "Cloth Init >> " + _mesh.polygonCount() );
+	// report( "Cloth Init >> " + _mesh.polygonCount() );
 
 	//this.setupAttribs();
 	//this.constraints.resize(0);
@@ -165,64 +101,68 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
 	report("Initialising cloth sim complete");
 }
 
-function ClothSimulation.addForce!(in Vec3 _force)
-{
-	// There is an inherent overhead in a PEX that may make it less efficient than serial calls in the case 
-	// that the operator that is called is trivial. Parallel executions best with large workloads. - Fabric Docs
-	Size pointCount = this.elementCount();
+// function ClothSimulation.addForce!(in Vec3 _force)
+// {
+// 	// There is an inherent overhead in a PEX that may make it less efficient than serial calls in the case 
+// 	// that the operator that is called is trivial. Parallel executions best with large workloads. - Fabric Docs
+// 	Size pointCount = this.elementCount();
 
-	if( pointCount < 1000 )
-	{
-		// Process in serial for small datasets
-		for(Index i = 0; i < pointCount; i++)
-		{
-			addForcePerVertex(i, this, this.attrs, _force);
-		}
-	}
-	else
-	{
-		// Instanciate PEX call for large datasets
-		addForce<<<pointCount>>>(this, this.attrs, _force);
-	}
-}
+// 	if( pointCount < 1000 )
+// 	{
+// 		// Process in serial for small datasets
+// 		for(Index i = 0; i < pointCount; i++)
+// 		{
+// 			addForcePerVertex(i, this, this.attrs, _force);
+// 		}
+// 	}
+// 	else
+// 	{
+// 		// Instanciate PEX call for large datasets
+// 		addForce<<<pointCount>>>(this, this.attrs, _force);
+// 	}
+// }
 
-/// \internal
-inline private addForcePerVertex(
-	in Index _index,
-	io Ref<ClothSimulation> _cloth, 
-	io Ref<GeometryAttributes> _attributes,
-	in Vec3 _force
-	)
-{
-	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
-	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
-	vel.values[_index] += _force / mass.values[_index];
-}
+// /// \internal
+// inline private addForcePerVertex(
+// 	in Index _index,
+// 	io Ref<ClothSimulation> _cloth, 
+// 	io Ref<GeometryAttributes> _attributes,
+// 	in Vec3 _force
+// 	)
+// {
+// 	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+// 	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+// 	vel.values[_index] += _force / mass.values[_index];
+// }
 
-///
-/// \brief      Create necessary attributes
-///
-/// \internal
-function ClothSimulation.setupAttribs!()
-{
-	// if (GPU){
-    // 	attributes.convertToSVM();
-    // }
+// ///
+// /// \brief      Create necessary attributes
+// ///
+// /// \internal
+// function ClothSimulation.setupAttribs!()
+// {
+// 	// if (GPU){
+//     // 	attributes.convertToSVM();
+//     // }
 
-    this.attribMovable			= this.attrs.getOrCreateIntegerAttribute("movable");
-    this.attribMass 			= this.attrs.getOrCreateScalarAttribute("mass");
-    this.attribPrevPos 			= this.attrs.getOrCreateVec3Attribute("prevpos");
-    this.attribAcceleration 		= this.attrs.getOrCreateVec3Attribute("accel");
+//     this.attribMovable			= this.attrs.getOrCreateIntegerAttribute("movable");
+//     this.attribMass 			= this.attrs.getOrCreateScalarAttribute("mass");
+//     this.attribPrevPos 			= this.attrs.getOrCreateVec3Attribute("prevpos");
+//     this.attribAcceleration 		= this.attrs.getOrCreateVec3Attribute("accel");
 
-    // this.m_attribConstraint = ConstraintAttribute();
-    // this.m_attribConstraint._attachToContainer("constraintTest", attributes);
-    // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
-}
+//     // this.m_attribConstraint = ConstraintAttribute();
+//     // this.m_attribConstraint._attachToContainer("constraintTest", attributes);
+//     // this.m_attribAccumulatedNormal 	= attributes.getOrCreateVec3Attribute("accumnrm");
+// }
 
+/**
+ * @brief      Steps the simulation forward in time by evaluating the chosen integrator to calculate particle movement.
+ *
+ */
 function ClothSimulation.stepSimulation!()
 {   
 	// GeometryAttributes attrs = this.mesh.getAttributes();
-	report(this.attrs.size());
+	// report(this.attrs.size());
 
 	//Solve constraints
 	for(Index i = 0; i < this.constraintStack.size(); ++i)
@@ -236,14 +176,15 @@ function ClothSimulation.stepSimulation!()
 		 this.forceStack[i].apply(this.attrs);
 	}
 
-	// // Integrate
+	//Integrate
 	this.integrator.apply(this.attrs);
 
-	Vec3 pos[] = this.attrs.getPositions().values;
-	report( pos[5] );
+	// Vec3 pos[] = this.attrs.getPositions().values;
+	// report( pos[5] );
 	
-	report("Stepping");
+	report("Stepping Simulation");
 }
+
 
 Vec3[] ClothSimulation.getAllPoints()
 {
@@ -256,23 +197,23 @@ PolygonMesh ClothSimulation.getMesh()
 	return this.mesh;
 }
 
-operator addForce<<<index>>>(
-	io Ref<ClothSimulation> _cloth, 
-	io Ref<GeometryAttributes> _attributes,
-	in Vec3 _force
-	)
-{
-	addForcePerVertex(index, _cloth, _attributes, _force);
-}
+// operator addForce<<<index>>>(
+// 	io Ref<ClothSimulation> _cloth, 
+// 	io Ref<GeometryAttributes> _attributes,
+// 	in Vec3 _force
+// 	)
+// {
+// 	addForcePerVertex(index, _cloth, _attributes, _force);
+// }
 
-operator simulateCloth<<<index>>>(
-	io Ref<ClothSimulation> _cloth, 
-	io Ref<GeometryAttributes> _attributes,
-	in Vec3 _force
-	)
-{
-	Vec3Attribute pos = _attributes.getAttribute("positions", Vec3Attribute);
-	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
-	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
-	vel.values[index] += _force / mass.values[index];
-}
+// operator simulateCloth<<<index>>>(
+// 	io Ref<ClothSimulation> _cloth, 
+// 	io Ref<GeometryAttributes> _attributes,
+// 	in Vec3 _force
+// 	)
+// {
+// 	Vec3Attribute pos = _attributes.getAttribute("positions", Vec3Attribute);
+// 	ScalarAttribute mass = _attributes.getAttribute("mass", ScalarAttribute);
+// 	Vec3Attribute vel = _attributes.getAttribute("accel", Vec3Attribute);
+// 	vel.values[index] += _force / mass.values[index];
+// }

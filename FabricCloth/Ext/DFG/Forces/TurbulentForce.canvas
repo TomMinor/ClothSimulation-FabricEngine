@@ -1,0 +1,48 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  _center: Vec3\n  _amplitude: Float32\n  _frequency: Vec3\n  result: TurbulentForce\n"
+    },
+  "title" : "TurbulentForce",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "center",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "amplitude",
+      "execPortType" : "In",
+      "typeSpec" : "Float32"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "frequency",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "TurbulentForce"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "5346D5E587B1DDD5A374E2E48D60B4DB",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = TurbulentForce(center, amplitude, frequency);
+}
+"
+  }

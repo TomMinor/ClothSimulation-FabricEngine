@@ -7,24 +7,30 @@
 [FABRIC:MT] Registered extensions {Math:1.3.0,AttributeHelpers:1.0.0,Manipulation:1.1.0,Images:1.0.2,DFGWrapper:1.1.0,FabricOBJ:1.1.0,OSOGL:1.1.0,Parameters:1.0.0,Animation:1.1.0,FabricSynchronization:1.1.0,Util:1.2.0,FabricStatistics:1.1.0,Bullet:1.0.1,OpenImageIO:1.0.2,BulletHelpers:1.0.0,FabricOGL:1.1.0,Characters:1.1.0,Alembic:1.0.0,DFGHelpers,FabricInterfaces:1.0.1,FileIO:1.2.0,Singletons:1.1.0,InlineDrawing:1.3.0,AlembicWrapper:1.3.0,JSON:1.0.0,Fbx:1.1.0,Containers:1.1.0,Geometry:1.3.0,FbxHelpers:1.0.2} in directory: /home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Exts
 [FABRIC:MT] Ignored extension directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': unable to open directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': No such file or directory (code 2 [0x2])
 [FABRIC:MT] IRCache: Not pruning since last prune was less than 24 hours ago
-[FABRIC:MT] Loaded extension Math in 93.393ms (cached)
-[FABRIC:MT] Loaded extension FabricSynchronization in 24.266ms (cached)
-[FABRIC:MT] Loaded extension FabricStatistics in 38.891ms (cached)
-[FABRIC:MT] Loaded extension Singletons in 22.663ms (cached)
-[FABRIC:MT] Loaded extension Util in 45.795ms (cached)
-[FABRIC:MT] Loaded extension Containers in 325.504ms (cached)
-[FABRIC:MT] Loaded extension Geometry in 385.578ms (cached)
-[FABRIC:MT] Loaded extension ClothSimulation in 48.059ms (cached)
+[FABRIC:MT] Loaded extension Math in 113.178ms (cached)
+[FABRIC:MT] Loaded extension FabricSynchronization in 35.899ms (cached)
+[FABRIC:MT] Loaded extension FabricStatistics in 51.787ms (cached)
+[FABRIC:MT] Loaded extension Singletons in 66.241ms (cached)
+[FABRIC:MT] Loaded extension Util in 112.306ms (cached)
+[FABRIC:MT] Loaded extension Containers in 453.290ms (cached)
+[FABRIC:MT] Loaded extension Geometry in 388.902ms (cached)
+[FABRIC:MT] Loaded extension ClothSimulation in 47.046ms (cached)
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator?()'
   Added to bin[normal][VerletIntergrator]
+registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator.initialise!()'
+  Added to bin[normal][VerletIntergrator.initialise]
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint?()'
   Added to bin[normal][SpringConstraint]
 registerFunction: thisType='GravityForce' func='function GravityForce?( in Vec3 _g )'
   Added to bin[normal][GravityForce]
 registerFunction: thisType='GravityForce' func='function GravityForce?()'
   Added to bin[normal][GravityForce]
+registerFunction: thisType='GravityForce' func='function GravityForce.apply!( io Ref<GeometryAttributes> attrs )'
+  Added to bin[normal][GravityForce.apply]
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
   Added to bin[normal][TurbulentForce]
+registerFunction: thisType='TurbulentForce' func='function TurbulentForce.apply!( io Ref<GeometryAttributes> attrs )'
+  Added to bin[normal][TurbulentForce.apply]
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
   Added to bin[normal][ClothSimulation]
 registerFunction: thisType='ClothSimulation' func='function Vec3[] ClothSimulation.getAllPoints?()'
@@ -35,7 +41,6 @@ registerFunction: thisType='ClothSimulation' func='function ClothSimulation.step
   Added to bin[normal][ClothSimulation.stepSimulation]
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator?()'
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator.initialise!()'
-  Skipped: isInternal()
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator.apply!( io Ref<GeometryAttributes> attributes )'
   Skipped: isInternal()
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint?()'
@@ -46,12 +51,10 @@ registerFunction: thisType='GravityForce' func='function GravityForce?()'
 registerFunction: thisType='GravityForce' func='function GravityForce.initialise!()'
   Skipped: isInternal()
 registerFunction: thisType='GravityForce' func='function GravityForce.apply!( io Ref<GeometryAttributes> attrs )'
-  Skipped: isInternal()
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce.initialise!()'
   Skipped: isInternal()
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce.apply!( io Ref<GeometryAttributes> attrs )'
-  Skipped: isInternal()
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation.stepSimulation!()'
 registerFunction: thisType='ClothSimulation' func='function Vec3[] ClothSimulation.getAllPoints?()'
@@ -59,12 +62,18 @@ registerFunction: thisType='ClothSimulation' func='function PolygonMesh ClothSim
 processFunctions
   bin[normal][VerletIntergrator][0] (asArray=false)
     thisType='VerletIntergrator' code='function VerletIntergrator?()'
+  bin[normal][VerletIntergrator.initialise][0] (asArray=false)
+    thisType='VerletIntergrator' code='function VerletIntergrator.initialise!()'
   bin[normal][SpringConstraint][0] (asArray=false)
     thisType='SpringConstraint' code='function SpringConstraint?()'
   bin[normal][GravityForce][1] (asArray=false)
     thisType='GravityForce' code='function GravityForce?( in Vec3 _g )'
+  bin[normal][GravityForce.apply][1] (asArray=false)
+    thisType='GravityForce' code='function GravityForce.apply!( io Ref<GeometryAttributes> attrs )'
   bin[normal][TurbulentForce][3] (asArray=false)
     thisType='TurbulentForce' code='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
+  bin[normal][TurbulentForce.apply][1] (asArray=false)
+    thisType='TurbulentForce' code='function TurbulentForce.apply!( io Ref<GeometryAttributes> attrs )'
   bin[normal][ClothSimulation][6] (asArray=false)
     thisType='ClothSimulation' code='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
   bin[normal][Vec3[] ClothSimulation.getAllPoints][0] (asArray=false)

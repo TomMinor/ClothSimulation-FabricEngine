@@ -2,12 +2,11 @@ require Math;
 require Geometry;
 
 
-/**
- * \brief Implements Hookes law to simulate a spring between 2 points
- * 
- * \dfgPresetFolder "Constraints"
- */
-
+///
+/// \brief Implements Hookes law to simulate a spring between 2 points
+///
+/// \dfgPresetFolder Constraints
+///
 object SpringConstraint : BaseConstraint
 {
 
@@ -15,11 +14,13 @@ object SpringConstraint : BaseConstraint
 
 ///
 /// \brief SpringConstraints ctor
+/// \dfgPresetFolder Constraints
 ///
 function SpringConstraint()
 {
 }
 
+/// \internal
 function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
 {
 	// adjust the amount of rows and columns.
