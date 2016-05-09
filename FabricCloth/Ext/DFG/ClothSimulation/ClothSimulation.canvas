@@ -1,0 +1,72 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "* Constructor initializes the cloth constraints based on the topology of the PolygonMesh.\n* Quad based meshes will work best.\n*\n* \\param _mesh will be used to initialize the constraint setup of the cloth.\n\nInitialise attribuets\nPin the cloth at these points for testing\nthis.constraints.resize(0);\n\nSupported types:\n  _mesh: PolygonMesh\n  _forceStack: BaseForce[]\n  _constraintStack: BaseConstraint[]\n  _integrator: BaseIntegrator\n  _rows: UInt32\n  _cols: UInt32\n  result: ClothSimulation\n"
+    },
+  "title" : "ClothSimulation",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "mesh",
+      "execPortType" : "In",
+      "typeSpec" : "PolygonMesh"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "forceStack",
+      "execPortType" : "In",
+      "typeSpec" : "BaseForce[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "constraintStack",
+      "execPortType" : "In",
+      "typeSpec" : "BaseConstraint[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "integrator",
+      "execPortType" : "In",
+      "typeSpec" : "BaseIntegrator"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "rows",
+      "execPortType" : "In",
+      "typeSpec" : "UInt32"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "cols",
+      "execPortType" : "In",
+      "typeSpec" : "UInt32"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+        },
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "ClothSimulation"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "3FE3FA9CE9EB3CB5C59C831B87E57F86",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = ClothSimulation(mesh, forceStack, constraintStack, integrator, rows, cols);
+}
+"
+  }

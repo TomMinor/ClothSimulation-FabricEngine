@@ -1,0 +1,37 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: TurbulentForce\n  attrs: GeometryAttributes\n"
+    },
+  "title" : "Apply",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "TurbulentForce"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+        },
+      "nodePortType" : "IO",
+      "name" : "attrs",
+      "execPortType" : "IO",
+      "typeSpec" : "GeometryAttributes"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "4B500E00FE972F73ADB1F8C39D2FB037",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.apply(attrs);
+}
+"
+  }

@@ -1,7 +1,5 @@
 require Geometry;
 
-interface BaseForce;
-
 object GravityForce : BaseForce
 {
 	Vec3 g;
@@ -9,12 +7,12 @@ object GravityForce : BaseForce
 
 function GravityForce( Vec3 _g )
 {
-	g = _g;
+	this.g = _g;
 }
 
 function GravityForce( )
 {
-	g = Vec3(0, 9.8, 0);
+	this.g = Vec3(0, 9.8, 0);
 }
 
 function GravityForce.initialise!()
@@ -22,24 +20,27 @@ function GravityForce.initialise!()
 	// Empty
 }
 
-function GravityForce.apply!(in GeometryAttributes attrs)
+function GravityForce.apply!(io GeometryAttributes attrs)
 {
 	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
   	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');
+  	
   	// Update in parallel
-  	satisfy<<<velocities.values.size()>>>(velocities.values, movable.values, g );
-	v.incrementVersion();
+  	applyGravity<<<velocities.values.size()>>>(velocities.values, movable.values, this.g );
+
+  	// Mark velocities as modified
+	velocities.incrementVersion();
 }
 
-operator apply<<<index>>>( 
+operator applyGravity<<<index>>>( 
 				io Vec3 velocities[],
   				Integer movable[],
-  				Float32 g
+  				Vec3 g
   				)
 {
 	// Pin immovable vertices
   	if ( !movable[index] )
 	{
-		velocities[index] += Vec3(0.0, -g, 0.0);
+		velocities[index] += g;
 	}
 }

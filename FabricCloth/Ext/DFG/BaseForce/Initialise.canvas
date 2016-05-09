@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: BaseForce\n"
+    },
+  "title" : "Initialise",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "BaseForce"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "A49676A196D8A8166DFD06974F6FFF74",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.initialise();
+}
+"
+  }

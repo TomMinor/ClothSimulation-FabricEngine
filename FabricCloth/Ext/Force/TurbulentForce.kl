@@ -1,7 +1,5 @@
 require Geometry;
 
-interface BaseForce;
-
 object TurbulentForce : BaseForce
 {
 	Vec3 center;
@@ -21,25 +19,31 @@ function TurbulentForce.initialise!()
 	// Empty
 }
 
-function TurbulentForce.apply!(in GeometryAttributes attrs)
+function TurbulentForce.apply!(io GeometryAttributes attrs)
 {
-	Vec3Attribute velocities = attrs.getOrCreateVec3Attribute('velocities');
-  	IntegerAttribute movable = attrs.getOrCreateIntegerAttribute('movable');
-  	// Update in parallel
-  	satisfy<<<velocities.values.size()>>>(velocities.values, movable.values, g );
-	v.incrementVersion();
+  Ref<Vec3Attribute> positions = attrs.getPositions();
+	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
+  Ref<IntegerAttribute> movable = attrs.getOrCreateIntegerAttribute('movable');
+  	
+  // Update in parallel
+  applyTurbulize<<<velocities.values.size()>>>(
+                            positions.values, 
+                            velocities.values, 
+                            movable.values,
+                            this.center, this.amplitude, this.frequency);
+	
+  velocities.incrementVersion();
 }
 
 
-
-operator applyTurbulizeVec3_task<<<index>>>(
-				io Vec3 velocities[],
+operator applyTurbulize<<<index>>>(
+          io Vec3 positions[],
+				  io Vec3 velocities[],
   				Integer movable[],
-  				Float32 g,
   				Vec3 center, Float32 amplitude, Vec3 frequency)
 {
   if ( !movable[index] ) {
-    Vec3 q = center + frequency * p[index];
+    Vec3 q = center + frequency * positions[index];
     velocities[index] += Vec3(	0.1 * amplitude * perlinNoise(q.x, q.z, q.y),
   				0.1 * amplitude * perlinNoise(q.y, q.x, q.z),
       				0.1 * amplitude * perlinNoise(q.z, q.y, q.x)

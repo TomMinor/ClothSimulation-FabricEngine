@@ -1,0 +1,37 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: BaseForce\n  attributes: GeometryAttributes\n"
+    },
+  "title" : "Apply",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "BaseForce"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+        },
+      "nodePortType" : "IO",
+      "name" : "attributes",
+      "execPortType" : "IO",
+      "typeSpec" : "GeometryAttributes"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "7C9817AEC09800D1A7B21C63EA23E832",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.apply(attributes);
+}
+"
+  }

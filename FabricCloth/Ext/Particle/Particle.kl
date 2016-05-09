@@ -2,14 +2,13 @@ require Math;
 require Geometry;
 
 
-/// \internal
+
 interface BaseForce
 {
 	initialise!();
 	apply!(io GeometryAttributes attributes);
 };
 
-/// \internal
 interface BaseIntegrator
 {
 	initialise!();
@@ -116,6 +115,10 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
 	this.forceStack = _forceStack;
 	this.integrator = _integrator;
 	this.constraintStack = _constraintStack;
+
+	if( this.integrator == null ) {
+		this.integrator = VerletIntergrator();	
+	}
 
 	this.mesh = _mesh;
 

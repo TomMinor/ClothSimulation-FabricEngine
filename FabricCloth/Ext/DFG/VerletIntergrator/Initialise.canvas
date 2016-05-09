@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: VerletIntergrator\n"
+    },
+  "title" : "Initialise",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "VerletIntergrator"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "6B57CA63DE08ACB1D64CDCDD05FACFC2",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.initialise();
+}
+"
+  }

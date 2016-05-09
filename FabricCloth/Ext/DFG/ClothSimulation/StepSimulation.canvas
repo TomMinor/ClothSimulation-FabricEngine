@@ -1,0 +1,30 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: ClothSimulation\n"
+    },
+  "title" : "StepSimulation",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 51,\n  \"g\" : 1,\n  \"b\" : 106\n  }"
+        },
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "ClothSimulation"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "2CB7D25DEDAB1E20E5561355649B9F42",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.stepSimulation();
+}
+"
+  }

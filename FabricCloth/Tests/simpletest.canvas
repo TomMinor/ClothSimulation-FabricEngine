@@ -4,13 +4,13 @@
     "timeline_timerFps" : "60",
     "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.3290506899356842,\n    \"y\" : 0.1111675873398781,\n    \"z\" : -0.9388680458068848,\n    \"t\" : -171.4612731933594\n    },\n  \"row1\" : {\n    \"x\" : 6.975391784180829e-07,\n    \"y\" : 0.9933962821960449,\n    \"z\" : 0.1177856549620628,\n    \"t\" : -31.0863151550293\n    },\n  \"row2\" : {\n    \"x\" : 0.9456953406333923,\n    \"y\" : -0.0386810228228569,\n    \"z\" : 0.3266750872135162,\n    \"t\" : 55.99067687988281\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.549551784992218\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.6455140709877014\n  }",
     "timeline_loopMode" : "0",
     "timeline_simMode" : "0",
     "camera_focalDistance" : "170.8739776611328",
-    "timeline_current" : "1000",
+    "timeline_current" : "712",
     "timeline_end" : "1000",
-    "uiGraphPan" : "{\n  \"x\" : 411.023375847212,\n  \"y\" : 166.0626820033478\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -25.0016766268086,\n  \"y\" : 412.8175525940751\n  }"
     },
   "title" : "",
   "ports" : [
@@ -1113,40 +1113,6 @@ dfgEntry {
         ],
       "executable" : "Fabric.Compounds.PolygonMesh.Modify.RecomputeNormals",
       "presetGUID" : "E469FC93B78CAC1D85111F400E87968E"
-      },
-    {
-      "objectType" : "Inst",
-      "metadata" : {
-        "uiGraphPos" : "{\"x\":661.3595569530758,\"y\":-115.6205164313089}"
-        },
-      "name" : "func",
-      "ports" : [
-        {
-          "objectType" : "InstPort",
-          "nodePortType" : "Out",
-          "name" : "test"
-          }
-        ],
-      "definition" : {
-        "objectType" : "Func",
-        "title" : "func",
-        "ports" : [
-          {
-            "objectType" : "Port",
-            "nodePortType" : "In",
-            "name" : "test",
-            "execPortType" : "Out",
-            "typeSpec" : "ClothSimulation"
-            }
-          ],
-        "extDeps" : {
-          "ClothSimulation" : "*"
-          },
-        "code" : "dfgEntry {
-  //result = lhs + rhs;
-}
-"
-        }
       }
     ],
   "connections" : {
@@ -1186,9 +1152,6 @@ dfgEntry {
       ],
     "RecomputeNormals_1.result" : [
       "DrawTexturedPolygonMesh.mesh"
-      ],
-    "func.test" : [
-      "test"
       ]
     },
   "requiredPresets" : {

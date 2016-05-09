@@ -1,9 +1,1 @@
 require Geometry;
-
-///
-/// \internal
-interface BaseForce
-{
-	initialise();
-	apply(in GeometryAttributes attributes);
-};

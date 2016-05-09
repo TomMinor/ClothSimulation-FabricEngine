@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: TurbulentForce\n"
+    },
+  "title" : "Initialise",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "TurbulentForce"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "79F33BD33CFBC74D4581F12BD8CA98BE",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.initialise();
+}
+"
+  }

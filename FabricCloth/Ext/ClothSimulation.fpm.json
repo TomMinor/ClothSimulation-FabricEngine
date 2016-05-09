@@ -1,10 +1,10 @@
 {
   "code": [
+  "Particle/Particle.kl",
    "Constraint/SpringConstraint.kl",
    "Force/GravityForce.kl",
    "Force/InterfaceForce.kl",
    "Force/TurbulentForce.kl",
-    "Particle/Particle.kl"
   ]
 
   "dfgPresets": {

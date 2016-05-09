@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: BaseIntegrator\n"
+    },
+  "title" : "Initialise",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "BaseIntegrator"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "B3FEBDD83958CF7E8F8D2EF6394F2EF5",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.initialise();
+}
+"
+  }

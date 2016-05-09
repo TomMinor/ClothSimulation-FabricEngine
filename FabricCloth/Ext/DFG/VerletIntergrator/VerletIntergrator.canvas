@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  result: VerletIntergrator\n"
+    },
+  "title" : "VerletIntergrator",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "VerletIntergrator"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "E816E2D4AEBA4E07309F2EB05855920C",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = VerletIntergrator();
+}
+"
+  }
