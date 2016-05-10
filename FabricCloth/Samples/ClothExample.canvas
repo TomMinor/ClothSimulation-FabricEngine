@@ -2,15 +2,15 @@
   "objectType" : "Graph",
   "metadata" : {
     "timeline_timerFps" : "30",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.9248641729354858,\n    \"y\" : 0.05702616646885872,\n    \"z\" : -0.3760057091712952,\n    \"t\" : -4.840389251708984\n    },\n  \"row1\" : {\n    \"x\" : -4.675251545904757e-07,\n    \"y\" : 0.9886664748191833,\n    \"z\" : 0.1499529480934143,\n    \"t\" : 18.38950538635254\n    },\n  \"row2\" : {\n    \"x\" : 0.3803045153617859,\n    \"y\" : -0.1386809945106506,\n    \"z\" : 0.9144100546836853,\n    \"t\" : 97.26273345947266\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.3151966333389282,\n    \"y\" : 0.2536100149154663,\n    \"z\" : -0.9145256876945496,\n    \"t\" : -7.436416625976562\n    },\n  \"row1\" : {\n    \"x\" : -2.533231509005418e-06,\n    \"y\" : 0.9635847210884094,\n    \"z\" : 0.2672473192214966,\n    \"t\" : 15.77918434143066\n    },\n  \"row2\" : {\n    \"x\" : 0.9490405917167664,\n    \"y\" : -0.08422673493623734,\n    \"z\" : 0.3037342429161072,\n    \"t\" : 19.05683135986328\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "timeline_loopMode" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.5322299599647522\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.5287215709686279\n  }",
     "timeline_simMode" : "0",
-    "camera_focalDistance" : "110.3274383544922",
-    "timeline_current" : "29",
+    "camera_focalDistance" : "74.94628143310547",
+    "timeline_current" : "47",
     "timeline_end" : "50",
-    "uiGraphPan" : "{\n  \"x\" : 1421.341656890489,\n  \"y\" : -1123.815745622771\n  }"
+    "uiGraphPan" : "{\n  \"x\" : 1152.013549804688,\n  \"y\" : -757.4996948242188\n  }"
     },
   "title" : "",
   "ports" : [
@@ -70,7 +70,7 @@
     {
       "objectType" : "Var",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 662.0192260742188,\n  \"y\" : 55.87155532836914\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 741.3787231445312,\n  \"y\" : -650.4280395507812\n  }"
         },
       "name" : "sim",
       "ports" : [
@@ -86,7 +86,7 @@
     {
       "objectType" : "Get",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 461.3348999023438,\n  \"y\" : 279.6399841308594\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 540.6944580078125,\n  \"y\" : -426.6596069335938\n  }"
         },
       "name" : "get",
       "ports" : [
@@ -101,7 +101,7 @@
     {
       "objectType" : "Set",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 1258.634643554688,\n  \"y\" : 207.7844696044922\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 1337.994262695312,\n  \"y\" : -498.5150756835938\n  }"
         },
       "name" : "set",
       "ports" : [
@@ -116,7 +116,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 656.7313232421875,\n  \"y\" : 137.8609466552734\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 736.0908203125,\n  \"y\" : -568.4386596679688\n  }"
         },
       "name" : "If_1",
       "ports" : [
@@ -148,7 +148,7 @@
       "objectType" : "Inst",
       "metadata" : {
         "uiComment" : "Reset if we're on the first frame",
-        "uiGraphPos" : "{\n  \"x\" : 457.3212890625,\n  \"y\" : 42.68330764770508\n  }",
+        "uiGraphPos" : "{\n  \"x\" : 536.6808471679688,\n  \"y\" : -663.6162719726562\n  }",
         "uiCommentExpanded" : "true"
         },
       "name" : "Le_1",
@@ -188,7 +188,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 89.24966430664062,\n  \"y\" : 86.86154937744141\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 168.6091766357422,\n  \"y\" : -619.4380493164062\n  }"
         },
       "name" : "ClothSimulation_1",
       "ports" : [
@@ -234,7 +234,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 959.8309326171875,\n  \"y\" : 205.8329010009766\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 1039.1904296875,\n  \"y\" : -500.4666748046875\n  }"
         },
       "name" : "StepSimulation_1",
       "ports" : [
@@ -250,7 +250,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 2196.0146484375,\n  \"y\" : 121.1621627807617\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 2275.3740234375,\n  \"y\" : -585.137451171875\n  }"
         },
       "name" : "DrawPolygonMesh_1",
       "ports" : [
@@ -335,7 +335,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 1919.607788085938,\n  \"y\" : 160.1885375976562\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 1998.967407226562,\n  \"y\" : -546.1110229492188\n  }"
         },
       "name" : "EmptyDrawingHandle_1",
       "ports" : [
@@ -351,7 +351,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 1753.4091796875,\n  \"y\" : 310.1529846191406\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 1832.768798828125,\n  \"y\" : -396.1466064453125\n  }"
         },
       "name" : "RecomputeNormals_1",
       "ports" : [
@@ -387,7 +387,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : 1542.76806640625,\n  \"y\" : 300.2522277832031\n  }"
+        "uiGraphPos" : "{\n  \"x\" : 1622.127685546875,\n  \"y\" : -406.04736328125\n  }"
         },
       "name" : "GetMesh_1",
       "ports" : [
@@ -408,7 +408,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -1055.931213378906,\n  \"y\" : 360.957763671875\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -976.571533203125,\n  \"y\" : -345.341796875\n  }"
         },
       "name" : "GetPlane_1",
       "ports" : [
@@ -450,7 +450,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -821.0053100585938,\n  \"y\" : 639.3178100585938\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -741.6458129882812,\n  \"y\" : -66.98178100585938\n  }"
         },
       "name" : "Transform_1",
       "ports" : [
@@ -476,7 +476,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -1059.160949707031,\n  \"y\" : 527.3939819335938\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -979.8013305664062,\n  \"y\" : -178.9055786132812\n  }"
         },
       "name" : "XfoFromSRT_1",
       "ports" : [
@@ -562,7 +562,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -367.9510192871094,\n  \"y\" : -49.49008178710938\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -288.5914611816406,\n  \"y\" : -755.7896728515625\n  }"
         },
       "name" : "Push_1",
       "ports" : [
@@ -584,7 +584,7 @@
       "objectType" : "Inst",
       "metadata" : {
         "uiComment" : "The force stack is evaluated every sim step",
-        "uiGraphPos" : "{\n  \"x\" : -167.2739410400391,\n  \"y\" : 2.155240058898926\n  }",
+        "uiGraphPos" : "{\n  \"x\" : -85.11903381347656,\n  \"y\" : -652.428955078125\n  }",
         "uiCommentExpanded" : "true"
         },
       "name" : "Push_2",
@@ -606,7 +606,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -578.0908508300781,\n  \"y\" : -49.59713745117188\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -498.7313232421875,\n  \"y\" : -755.896728515625\n  }"
         },
       "name" : "GravityForce_1",
       "ports" : [
@@ -617,7 +617,7 @@
             "Vec3" : {
               "x" : 0,
               "y" : -0.009999999776482582,
-              "z" : 0
+              "z" : 0.009999999776482582
               }
             },
           "name" : "g"
@@ -634,7 +634,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -400.5594177246094,\n  \"y\" : 49.40394592285156\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -321.1998596191406,\n  \"y\" : -656.8956298828125\n  }"
         },
       "name" : "TurbulentForce_1",
       "ports" : [
@@ -647,7 +647,7 @@
           "objectType" : "InstPort",
           "nodePortType" : "In",
           "defaultValues" : {
-            "Float32" : 0.5
+            "Float32" : 0.1000000014901161
             },
           "name" : "amplitude"
           },
@@ -675,7 +675,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-177.2443237304688,\"y\":277.4834594726562}"
+        "uiGraphPos" : "{\n  \"x\" : -97.88485717773438,\n  \"y\" : -428.816162109375\n  }"
         },
       "name" : "Push_3",
       "ports" : [
@@ -696,7 +696,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-423.6275634765625,\"y\":272.00634765625}"
+        "uiGraphPos" : "{\n  \"x\" : -344.2680053710938,\n  \"y\" : -434.2932739257812\n  }"
         },
       "name" : "SpringConstraint_1",
       "ports" : [
@@ -720,7 +720,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\n  \"x\" : -167.3126220703125,\n  \"y\" : 419.2474975585938\n  }"
+        "uiGraphPos" : "{\n  \"x\" : -87.95315551757812,\n  \"y\" : -287.0520629882812\n  }"
         },
       "name" : "VerletIntergrator_1",
       "ports" : [
@@ -1243,9 +1243,9 @@
           "nodePortType" : "In",
           "defaultValues" : {
             "Vec3" : {
-              "x" : 0,
+              "x" : 0.001000000047497451,
               "y" : -0.009999999776482582,
-              "z" : 0
+              "z" : 0.006000000052154064
               }
             },
           "name" : "g"
@@ -1698,7 +1698,7 @@
       "objectType" : "User",
       "metadata" : {
         "uiTitle" : "Simple Simulation",
-        "uiGraphPos" : "{\n  \"x\" : -1616.84765625,\n  \"y\" : -191.6858978271484\n  }",
+        "uiGraphPos" : "{\n  \"x\" : -1537.488037109375,\n  \"y\" : -897.9854736328125\n  }",
         "uiGraphSize" : "{\"w\":4307.15625,\"h\":1355.972778320312}"
         },
       "name" : "backDrop_8",
