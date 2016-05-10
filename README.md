@@ -1,6 +1,10 @@
 # Cloth Simulation in Fabric Engine
 ### AGSDT Programming Assignment - Tom Minor
 
+Watch the demo video here : https://vimeo.com/166024346
+
+![Viewport Result](images/clothviewport.png)
+
 ## Installation
 
 * Append the agsdt-TomMinor/FabricCloth/Ext path to FABRIC_EXTS_PATH
