@@ -22,4 +22,4 @@ Watch the demo video here : https://vimeo.com/166024346
 
 ## Special Thanks
 
-[Marc Albrecht](https://github.com/Marc-Albrecht) and all the helpful people at the [Fabric Forums](http://forums.fabricengine.com)
+[Marc Albrecht](https://github.com/Marc-Albrecht) for answering all my silly questions and all the helpful people at the [Fabric Forums](http://forums.fabricengine.com) for doing the same.
