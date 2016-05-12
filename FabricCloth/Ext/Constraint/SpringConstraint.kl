@@ -1,3 +1,14 @@
+/// \version 1.0
+/// \file SpringConstraint.kl
+///
+/// \brief Simulates a spring between two positions using hookes law.
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+/// \todo 	Very hard coded right now, only works for grids of equal sizes.
+/// 		Really need to set this up so I can generate constraints for any topology
+
 require Math;
 require Geometry;
 

@@ -1,3 +1,16 @@
+/// \version 1.0
+/// \file Particle.kl
+///
+/// \brief The main softbody simulation object, can be configured using a stack of forces and constraints. Integrator can be chosen by plugging that in too.
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+/// \todo 	A bit haphazard right now, the polygon mesh is stored internally
+///			which makes resetting go funky because I'm modifying the original instead of a copy.
+///			Also attributes are stored directly in the mesh, would make more sense to store those on an
+///			internal copy too.
+
 require Math;
 require Geometry;
 

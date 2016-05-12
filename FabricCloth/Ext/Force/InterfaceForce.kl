@@ -1,3 +1,12 @@
+/// \version 1.0
+/// \file InterfaceForce.kl
+///
+/// \brief Base Interface for all forces
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+
 require Geometry;
 
 ///

@@ -1,3 +1,12 @@
+/// \version 1.0
+/// \file GravityForce.kl
+///
+/// \brief Apply a constant force in a certain direction.
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+
 require Geometry;
 
 /// \dfgPresetFolder  Forces

@@ -1,3 +1,13 @@
+/// \version 1.0
+/// \file VerletIntegrator.kl
+///
+/// \brief Verlet integrator for particle sim.
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+/// \todo Very unstable right now
+
 require Geometry;
 
 ///

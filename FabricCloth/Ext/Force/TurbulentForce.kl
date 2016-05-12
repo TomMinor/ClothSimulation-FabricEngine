@@ -1,3 +1,14 @@
+/// \version 1.0
+/// \file TurbulentForce.kl
+///
+/// \brief Applies a noise force to the cloth simulation
+///
+/// \author Tom Minor, NCCA, Bournemouth University
+/// \date 09/05/16
+///
+/// \todo Force stack currently isn't re-evaluated every frame, which means time based
+///       turbulence is an issue.
+
 require Geometry;
 
 /// \dfgPresetFolder  Forces
