@@ -17,6 +17,7 @@ object TurbulentForce : BaseForce
 	Vec3 center;
 	Float32 amplitude;
 	Vec3 frequency;
+  private Float32 time;
 };
 
 /// \dfgPresetFolder Forces
@@ -26,6 +27,7 @@ function TurbulentForce( Vec3 _center, Float32 _amplitude, Vec3 _frequency )
 	this.center = _center;
 	this.amplitude = _amplitude;
 	this.frequency = _frequency;
+  this.time = 0;
 }
 
 /// \dfgPresetFolder Forces
@@ -34,6 +36,12 @@ function TurbulentForce.initialise!()
 {
 	// Empty
 }
+
+function TurbulentForce.update!()
+{
+  this.time += 1;
+}
+
 
 /// \dfgPresetFolder Forces
 /// \internal
@@ -48,7 +56,9 @@ function TurbulentForce.apply!(io Ref<GeometryAttributes> attrs)
                             positions.values, 
                             velocities.values, 
                             movable.values,
-                            this.center, this.amplitude, this.frequency);
+                            this.center + (Vec3(this.time) * this.frequency), 
+                            this.amplitude,
+                            this.frequency);
 	
   velocities.incrementVersion();
 }
@@ -60,11 +70,13 @@ operator applyTurbulize<<<index>>>(
   				Integer movable[],
   				Vec3 center, Float32 amplitude, Vec3 frequency)
 {
-  if ( !movable[index] ) {
+  Float32 TIME_STEPSIZE2 = 0.5*0.5;
+
+  // if ( !movable[index] ) {
     Vec3 q = center + frequency * positions[index];
-    velocities[index] += Vec3(	0.1 * amplitude * perlinNoise(q.x, q.z, q.y),
-  				0.1 * amplitude * perlinNoise(q.y, q.x, q.z),
-      				0.1 * amplitude * perlinNoise(q.z, q.y, q.x)
-      		       	);
-  }
+    velocities[index] += Vec3(	amplitude * perlinNoise(q.x, q.z, q.y),
+  				                      amplitude * perlinNoise(q.y, q.x, q.z),
+      				                  amplitude * perlinNoise(q.z, q.y, q.x)
+      		       	            );  
+  // }
 }

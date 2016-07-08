@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  a: LocalL16UInt32Array\n  b: LocalL16UInt32Array\n  result: LocalL16UInt32Array\n"
+    },
+  "title" : "ArrayXor",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "a",
+      "execPortType" : "In",
+      "typeSpec" : "LocalL16UInt32Array"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "b",
+      "execPortType" : "In",
+      "typeSpec" : "LocalL16UInt32Array"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "LocalL16UInt32Array"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "C7FA88E0175E0DA8F96EC934629428BD",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = arrayXor(a, b);
+}
+"
+  }

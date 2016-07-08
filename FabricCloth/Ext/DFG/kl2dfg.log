@@ -1,20 +1,22 @@
 [FABRIC:MT] Fabric Engine version 2.1.0
-[FABRIC:MT] Loading DFG presets from /home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Presets/DFG
-[FABRIC:MT] Loading DFG presets from /home/i7245143/src/agsdt-TomMinor/FabricCloth/Ext/DFG
-[FABRIC:MT] Loading DFG presets from /home/i7245143/Fabric/Presets
-[FABRIC:MT] Registered extension {TestExt} in directory: /home/i7245143/Documents/Fabric/TestExt
-[FABRIC:MT] Registered extension {ParticleSystem} in directory: /home/i7245143/src/FabricCPS/Ext
-[FABRIC:MT] Registered extensions {Math:1.3.0,AttributeHelpers:1.0.0,Manipulation:1.1.0,Images:1.0.2,DFGWrapper:1.1.0,FabricOBJ:1.1.0,OSOGL:1.1.0,Parameters:1.0.0,Animation:1.1.0,FabricSynchronization:1.1.0,Util:1.2.0,FabricStatistics:1.1.0,Bullet:1.0.1,OpenImageIO:1.0.2,BulletHelpers:1.0.0,FabricOGL:1.1.0,Characters:1.1.0,Alembic:1.0.0,DFGHelpers,FabricInterfaces:1.0.1,FileIO:1.2.0,Singletons:1.1.0,InlineDrawing:1.3.0,AlembicWrapper:1.3.0,JSON:1.0.0,Fbx:1.1.0,Containers:1.1.0,Geometry:1.3.0,FbxHelpers:1.0.2} in directory: /home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Exts
-[FABRIC:MT] Ignored extension directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': unable to open directory '/home/i7245143/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': No such file or directory (code 2 [0x2])
+[FABRIC:MT] Loading DFG presets from /transfer/src/FabricEngine-2.1.0-Linux-x86_64/Presets/DFG
+[FABRIC:MT] Loading DFG presets from /home/tom/Fabric/Presets
+[FABRIC:MT] Registered extension {ClothSimulation} in directory: /transfer/src/ClothSimulation-FabricEngine/FabricCloth/Ext
+[FABRIC:MT] Registered extensions {Alembic:1.0.0,InlineDrawing:1.3.0,FabricInterfaces:1.0.1,FabricOGL:1.1.0,JSON:1.0.0,Singletons:1.1.0,FabricStatistics:1.1.0,Bullet:1.0.1,OSOGL:1.1.0,Util:1.2.0,Containers:1.1.0,Parameters:1.0.0,Characters:1.1.0,BulletHelpers:1.0.0,Geometry:1.3.0,DFGHelpers,Fbx:1.1.0,Images:1.0.2,OpenImageIO:1.0.2,AlembicWrapper:1.3.0,FabricSynchronization:1.1.0,Math:1.3.0,Manipulation:1.1.0,FabricOBJ:1.1.0,DFGWrapper:1.1.0,FileIO:1.2.0,FbxHelpers:1.0.2,AttributeHelpers:1.0.0,Animation:1.1.0} in directory: /home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Exts
+[FABRIC:MT] Ignored extension directory '/home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': unable to open directory '/home/tom/src/FabricEngine-2.1.0-Linux-x86_64/Tests/Exts': No such file or directory (code 2 [0x2])
 [FABRIC:MT] IRCache: Not pruning since last prune was less than 24 hours ago
-[FABRIC:MT] Loaded extension Math in 94.446ms (cached)
-[FABRIC:MT] Loaded extension FabricSynchronization in 22.788ms (cached)
-[FABRIC:MT] Loaded extension FabricStatistics in 35.484ms (cached)
-[FABRIC:MT] Loaded extension Singletons in 18.251ms (cached)
-[FABRIC:MT] Loaded extension Util in 42.770ms (cached)
-[FABRIC:MT] Loaded extension Containers in 311.027ms (cached)
-[FABRIC:MT] Loaded extension Geometry in 389.599ms (cached)
-[FABRIC:MT] Loaded extension ClothSimulation in 1291.313ms (first time)
+[FABRIC:MT] Loaded extension Math in 78.508ms (cached)
+[FABRIC:MT] Loaded extension FabricSynchronization in 10.151ms (cached)
+[FABRIC:MT] Loaded extension FabricStatistics in 22.433ms (cached)
+[FABRIC:MT] Loaded extension Singletons in 3.494ms (cached)
+[FABRIC:MT] Loaded extension Util in 19.736ms (cached)
+[FABRIC:MT] Loaded extension Containers in 249.887ms (cached)
+[FABRIC:MT] Loaded extension Geometry in 331.272ms (cached)
+[FABRIC:MT] Loaded extension ClothSimulation in 824.430ms (first time)
+registerFunction: thisType='(null)' func='function Boolean arrayFind( in LocalL16UInt32Array items, in UInt32 item )'
+  Added to bin[normal][Boolean arrayFind]
+registerFunction: thisType='(null)' func='function LocalL16UInt32Array arrayXor( in LocalL16UInt32Array a, in LocalL16UInt32Array b )'
+  Added to bin[normal][LocalL16UInt32Array arrayXor]
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator?( in Float32 _rate )'
   Added to bin[normal][VerletIntergrator]
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator?()'
@@ -23,18 +25,36 @@ registerFunction: thisType='SpringConstraint' func='function SpringConstraint?( 
   Added to bin[normal][SpringConstraint]
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint?()'
   Added to bin[normal][SpringConstraint]
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.addBendConstraint!( io Lines constraints[8], in Size a, in Size b )'
+  Skipped: isPrivate()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.addStructuralConstraint!( io Lines constraints[8], in Size a, in Size b )'
+  Skipped: isPrivate()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.init!( io ClothSimulation _sim )'
+  Added to bin[normal][SpringConstraint.init]
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.satisfy?( in Spring constraint, io Ref<Vec3Attribute> positions, in Ref<IntegerAttribute> movable )'
+  Added to bin[normal][SpringConstraint.satisfy]
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.setupConstraints!( in Size index, io Lines constraints[8] )'
+  Skipped: isPrivate()
 registerFunction: thisType='BallCollisionConstraint' func='function BallCollisionConstraint?( in Vec3 _position, in Float32 _radius )'
   Added to bin[normal][BallCollisionConstraint]
+registerFunction: thisType='BallCollisionConstraint' func='function BallCollisionConstraint.init!( io ClothSimulation _sim )'
+  Added to bin[normal][BallCollisionConstraint.init]
 registerFunction: thisType='GravityForce' func='function GravityForce?( in Vec3 _g )'
   Added to bin[normal][GravityForce]
 registerFunction: thisType='GravityForce' func='function GravityForce?()'
   Added to bin[normal][GravityForce]
+registerFunction: thisType='GravityForce' func='function GravityForce.update!()'
+  Added to bin[normal][GravityForce.update]
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
   Added to bin[normal][TurbulentForce]
+registerFunction: thisType='TurbulentForce' func='function TurbulentForce.update!()'
+  Added to bin[normal][TurbulentForce.update]
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
   Added to bin[normal][ClothSimulation]
 registerFunction: thisType='ClothSimulation' func='function Vec3[] ClothSimulation.getAllPoints?()'
   Added to bin[normal][Vec3[] ClothSimulation.getAllPoints]
+registerFunction: thisType='ClothSimulation' func='function Lines[8] ClothSimulation.getDebugLines?()'
+  Added to bin[normal][Lines[8] ClothSimulation.getDebugLines]
 registerFunction: thisType='ClothSimulation' func='function PolygonMesh ClothSimulation.getMesh?()'
   Added to bin[normal][PolygonMesh ClothSimulation.getMesh]
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation.stepSimulation!()'
@@ -45,10 +65,19 @@ registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator.
   Skipped: isInternal()
 registerFunction: thisType='VerletIntergrator' func='function VerletIntergrator.apply!( io Ref<GeometryAttributes> attributes )'
   Skipped: isInternal()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.addStructuralConstraint!( io Lines constraints[8], in Size a, in Size b )'
+  Skipped: isPrivate()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.addBendConstraint!( io Lines constraints[8], in Size a, in Size b )'
+  Skipped: isPrivate()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.setupConstraints!( in Size index, io Lines constraints[8] )'
+  Skipped: isPrivate()
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.init!( io ClothSimulation _sim )'
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint?()'
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint?( in Float32 _s )'
+registerFunction: thisType='SpringConstraint' func='function SpringConstraint.satisfy?( in Spring constraint, io Ref<Vec3Attribute> positions, in Ref<IntegerAttribute> movable )'
 registerFunction: thisType='SpringConstraint' func='function SpringConstraint.solve!( io Ref<GeometryAttributes> attrs, in UInt32 _rows, in UInt32 _cols )'
   Skipped: isInternal()
+registerFunction: thisType='BallCollisionConstraint' func='function BallCollisionConstraint.init!( io ClothSimulation _sim )'
 registerFunction: thisType='BallCollisionConstraint' func='function BallCollisionConstraint?( in Vec3 _position, in Float32 _radius )'
 registerFunction: thisType='BallCollisionConstraint' func='function BallCollisionConstraint.solve!( io Ref<GeometryAttributes> attrs, in UInt32 _rows, in UInt32 _cols )'
   Skipped: isInternal()
@@ -56,32 +85,51 @@ registerFunction: thisType='GravityForce' func='function GravityForce?( in Vec3 
 registerFunction: thisType='GravityForce' func='function GravityForce?()'
 registerFunction: thisType='GravityForce' func='function GravityForce.initialise!()'
   Skipped: isInternal()
+registerFunction: thisType='GravityForce' func='function GravityForce.update!()'
 registerFunction: thisType='GravityForce' func='function GravityForce.apply!( io Ref<GeometryAttributes> attrs )'
   Skipped: isInternal()
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce.initialise!()'
   Skipped: isInternal()
+registerFunction: thisType='TurbulentForce' func='function TurbulentForce.update!()'
 registerFunction: thisType='TurbulentForce' func='function TurbulentForce.apply!( io Ref<GeometryAttributes> attrs )'
   Skipped: isInternal()
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
 registerFunction: thisType='ClothSimulation' func='function ClothSimulation.stepSimulation!()'
+registerFunction: thisType='ClothSimulation' func='function Lines[8] ClothSimulation.getDebugLines?()'
 registerFunction: thisType='ClothSimulation' func='function Vec3[] ClothSimulation.getAllPoints?()'
 registerFunction: thisType='ClothSimulation' func='function PolygonMesh ClothSimulation.getMesh?()'
 processFunctions
+  bin[normal][Boolean arrayFind][2] (asArray=false)
+    thisType='' code='function Boolean arrayFind( in LocalL16UInt32Array items, in UInt32 item )'
+  bin[normal][LocalL16UInt32Array arrayXor][2] (asArray=false)
+    thisType='' code='function LocalL16UInt32Array arrayXor( in LocalL16UInt32Array a, in LocalL16UInt32Array b )'
   bin[normal][VerletIntergrator][1] (asArray=false)
     thisType='VerletIntergrator' code='function VerletIntergrator?( in Float32 _rate )'
   bin[normal][SpringConstraint][1] (asArray=false)
     thisType='SpringConstraint' code='function SpringConstraint?( in Float32 _s )'
+  bin[normal][SpringConstraint.init][1] (asArray=false)
+    thisType='SpringConstraint' code='function SpringConstraint.init!( io ClothSimulation _sim )'
+  bin[normal][SpringConstraint.satisfy][3] (asArray=false)
+    thisType='SpringConstraint' code='function SpringConstraint.satisfy?( in Spring constraint, io Ref<Vec3Attribute> positions, in Ref<IntegerAttribute> movable )'
   bin[normal][BallCollisionConstraint][2] (asArray=false)
     thisType='BallCollisionConstraint' code='function BallCollisionConstraint?( in Vec3 _position, in Float32 _radius )'
+  bin[normal][BallCollisionConstraint.init][1] (asArray=false)
+    thisType='BallCollisionConstraint' code='function BallCollisionConstraint.init!( io ClothSimulation _sim )'
   bin[normal][GravityForce][1] (asArray=false)
     thisType='GravityForce' code='function GravityForce?( in Vec3 _g )'
+  bin[normal][GravityForce.update][0] (asArray=false)
+    thisType='GravityForce' code='function GravityForce.update!()'
   bin[normal][TurbulentForce][3] (asArray=false)
     thisType='TurbulentForce' code='function TurbulentForce?( in Vec3 _center, in Float32 _amplitude, in Vec3 _frequency )'
+  bin[normal][TurbulentForce.update][0] (asArray=false)
+    thisType='TurbulentForce' code='function TurbulentForce.update!()'
   bin[normal][ClothSimulation][6] (asArray=false)
     thisType='ClothSimulation' code='function ClothSimulation?( in PolygonMesh _mesh, in BaseForce _forceStack[], in BaseConstraint _constraintStack[], in BaseIntegrator _integrator, in UInt32 _rows, in UInt32 _cols )'
   bin[normal][Vec3[] ClothSimulation.getAllPoints][0] (asArray=false)
     thisType='ClothSimulation' code='function Vec3[] ClothSimulation.getAllPoints?()'
+  bin[normal][Lines[8] ClothSimulation.getDebugLines][0] (asArray=false)
+    thisType='ClothSimulation' code='function Lines[8] ClothSimulation.getDebugLines?()'
   bin[normal][PolygonMesh ClothSimulation.getMesh][0] (asArray=false)
     thisType='ClothSimulation' code='function PolygonMesh ClothSimulation.getMesh?()'
   bin[normal][ClothSimulation.stepSimulation][0] (asArray=false)

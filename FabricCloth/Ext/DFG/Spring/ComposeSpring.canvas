@@ -1,0 +1,56 @@
+// Created by kl2dfg (processComposeFunction)
+{
+  "objectType" : "Func",
+  "title" : "-> Spring",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Size" : 0
+        },
+      "name" : "p0",
+      "execPortType" : "In",
+      "typeSpec" : "Size"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Size" : 0
+        },
+      "name" : "p1",
+      "execPortType" : "In",
+      "typeSpec" : "Size"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Float32" : 0
+        },
+      "name" : "rest",
+      "execPortType" : "In",
+      "typeSpec" : "Float32"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Spring"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "7E88596E8AB5E3179F6334EC01FEDB56",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result.p0 = p0;
+  result.p1 = p1;
+  result.rest = rest;
+}
+"
+  }

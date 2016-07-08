@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  items: LocalL16UInt32Array\n  item: UInt32\n  result: Boolean\n"
+    },
+  "title" : "ArrayFind",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "items",
+      "execPortType" : "In",
+      "typeSpec" : "LocalL16UInt32Array"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "item",
+      "execPortType" : "In",
+      "typeSpec" : "UInt32"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "286CBE9622141264D3D74E52F0C99492",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  result = arrayFind(items, item);
+}
+"
+  }

@@ -9,6 +9,8 @@
 
 require Geometry;
 
+object ClothSimulation;
+
 ///
 ///Interface for all constraints
 ///
@@ -17,6 +19,8 @@ require Geometry;
 ///
 interface BaseConstraint
 {
+	init!(io ClothSimulation _sim);
+
 	/// 
 	/// \internal
 	/// Grid is hardcoded now, so all the solvers need to have rows/columns passed in

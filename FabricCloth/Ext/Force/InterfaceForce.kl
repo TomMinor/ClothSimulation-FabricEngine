@@ -24,6 +24,8 @@ interface BaseForce
 	///
 	initialise!();
 
+	update!();
+
 	///
 	///Applies the force to the geometry, any necessary attributes can be added dynamically
 	///

@@ -26,6 +26,7 @@ object ClothSimulation : Points
 	Ref<PolygonMesh> mesh;
 
 	Boolean isActive;
+	Boolean isInit;
 
 	Ref<GeometryAttributes> attrs;
 
@@ -46,6 +47,8 @@ object ClothSimulation : Points
 	// Grid info
 	UInt32 rows;
 	UInt32 cols;
+
+	Lines constraintDebug[8]; // Debug lines for constraints
 };
 
 /**
@@ -61,6 +64,7 @@ object ClothSimulation : Points
  */
 function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseConstraint _constraintStack[], BaseIntegrator _integrator, UInt32 _rows, UInt32 _cols)
 {
+	this.isInit = false;
 	report("Initialising cloth sim");
 
 	this.mesh = _mesh;
@@ -92,8 +96,6 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
 	// Initialise attributes
 	Vec3Attribute velocities = this.attrs.getOrCreateVec3Attribute('velocities');
 	IntegerAttribute movable = this.attrs.getOrCreateIntegerAttribute('movable');
-
-	report(velocities.size());
 	
 	// Pin the cloth at these points for testing
 	// for (Index row = 0; _rows <= adjRows; ++row)
@@ -101,17 +103,32 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
 	// 	movable.values[_rows * (adjCols + 1)] = true;
 	// }
 	
-	for(Index i = 0; i < 40; i++)
+	for(Index i = 0; i < movable.size(); i++)
 	{
-		movable.values[i] = true;
+		if(i < 40)
+		{
+			movable.values[i] = false;
+		}
+		else
+		{
+			movable.values[i] = true;
+		}
 	}
 
-	// report( "Cloth Init >> " + _mesh.polygonCount() );
+	// Initialise lines array
+	for(Index i = 0; i < 8; i++)
+	{
+		this.constraintDebug[i] = Lines();
+	}
 
-	//this.setupAttribs();
-	//this.constraints.resize(0);
-	// 
+	// Initialise constraint data
+	for(Index i = 0; i < this.constraintStack.size(); i++)
+	{
+		this.constraintStack[i].init(this);
+	}
+
 	report("Initialising cloth sim complete");
+	this.isInit = true;
 }
 
 // function ClothSimulation.addForce!(in Vec3 _force)
@@ -174,6 +191,12 @@ function ClothSimulation(in PolygonMesh _mesh, BaseForce _forceStack[], BaseCons
  */
 function ClothSimulation.stepSimulation!()
 {   
+	if(!this.isInit)
+	{
+		report("Simulation needs re-initialising!");
+		return;
+	}
+
 	// GeometryAttributes attrs = this.mesh.getAttributes();
 	// report(this.attrs.size());
 
@@ -183,9 +206,11 @@ function ClothSimulation.stepSimulation!()
 		 this.constraintStack[i].solve(this.attrs, this.rows, this.cols);
 	}
 
+
 	//Solve forces
 	for(Index i = 0; i < this.forceStack.size(); ++i)
 	{
+		this.forceStack[i].update();
 		 this.forceStack[i].apply(this.attrs);
 	}
 
@@ -198,6 +223,10 @@ function ClothSimulation.stepSimulation!()
 	report("Stepping Simulation");
 }
 
+Lines[8] ClothSimulation.getDebugLines()
+{
+	return this.constraintDebug;
+}
 
 Vec3[] ClothSimulation.getAllPoints()
 {

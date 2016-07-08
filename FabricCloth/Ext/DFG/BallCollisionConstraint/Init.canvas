@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: BallCollisionConstraint\n  _sim: ClothSimulation\n"
+    },
+  "title" : "Init",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "BallCollisionConstraint"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "sim",
+      "execPortType" : "IO",
+      "typeSpec" : "ClothSimulation"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "68B0F57B70A47ABAAABC98F92BF56386",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.init(sim);
+}
+"
+  }

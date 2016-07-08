@@ -34,6 +34,11 @@ function GravityForce.initialise!()
 	// Empty
 }
 
+function GravityForce.update!()
+{
+	// Empty
+}
+
 /// \dfgPresetFolder Forces
 /// \internal
 function GravityForce.apply!(io Ref<GeometryAttributes> attrs)
@@ -63,9 +68,11 @@ operator applyGravity<<<index>>>(
   				Vec3 g
   				)
 {
+	Float32 TIME_STEPSIZE2 = 0.5*0.5;
+
 	// Pin immovable vertices
-  	if ( !movable[index] )
+  	// if( movable[index] )
 	{
-		velocities[index] += g;
+		velocities[index] += g * TIME_STEPSIZE2;
 	}
 }

@@ -22,6 +22,12 @@ object BallCollisionConstraint : BaseConstraint
 	Float32 radius;
 };
 
+function BallCollisionConstraint.init!(io ClothSimulation _sim)
+{
+	//
+}
+
+
 ///
 /// \brief SpringConstraints ctor
 /// \dfgPresetFolder Constraints

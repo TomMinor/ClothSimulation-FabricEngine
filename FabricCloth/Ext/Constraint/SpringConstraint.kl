@@ -12,6 +12,15 @@
 require Math;
 require Geometry;
 
+// Simple structure to wrap up the spring constraint between 2 points
+struct Spring
+{
+	// Point indices of a PolygonMesh
+	Size p0;
+	Size p1;
+	Float32 rest;
+};
+
 
 ///
 /// \brief Implements Hookes law to simulate a spring between 2 points
@@ -21,7 +30,143 @@ require Geometry;
 object SpringConstraint : BaseConstraint
 {
 	Float32 s;
+
+	Spring structuralConstraints[];
+	Spring bendConstraints[];
+	Ref<PolygonMesh> mesh;
 };
+
+// So inefficient
+Boolean arrayFind(in LocalL16UInt32Array items, in UInt32 item)
+{
+  for(Index i = 0; i < items.size(); i++)
+  {
+    if( items.get(i) == item )
+    {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+function LocalL16UInt32Array arrayXor(in LocalL16UInt32Array a, in LocalL16UInt32Array b)
+{
+  LocalL16UInt32Array result =  LocalL16UInt32Array();
+  
+  for(Index i = 0; i < a.size(); i++)
+  {
+    UInt32 tmp = a.get(i);
+    if( arrayFind(b, tmp) )
+    {
+      result.push(tmp);
+    }
+  }
+  
+  return result;
+}
+
+private function SpringConstraint.addStructuralConstraint!(io Lines constraints[8], in Size a, in Size b)
+{
+	Vec3 visualisationOffset = Vec3(0, 0.1, 0);
+	Vec3 posA = this.mesh.getPointPosition(a);
+	Vec3 posB = this.mesh.getPointPosition(b);
+
+	constraints[ 0].addLine(posA + visualisationOffset, posB + visualisationOffset);
+
+	Spring tmp;
+	tmp.p0 = a;
+	tmp.p1 = b;
+	tmp.rest = (posB - posA).length();
+	this.structuralConstraints.push(tmp);
+}
+
+private function SpringConstraint.addBendConstraint!(io Lines constraints[8], in Size a, in Size b)
+{
+	Vec3 visualisationOffset = Vec3(0, 0.9, 0);
+	Vec3 posA = this.mesh.getPointPosition(a);
+	Vec3 posB = this.mesh.getPointPosition(b);
+
+	constraints[ 4].addLine(posA + visualisationOffset, posB + visualisationOffset);
+
+	Spring tmp;
+	tmp.p0 = a;
+	tmp.p1 = b;
+	tmp.rest = (posB - posA).length();
+	this.bendConstraints.push(tmp);
+}
+
+private function SpringConstraint.setupConstraints!(in Size index, io Lines constraints[8])
+{
+  	Vec3 thisPointPosition = this.mesh.getPointPosition(index);
+  
+    // Query directly connected points (not points connected by face)
+    LocalL16UInt32Array neighbourPoints;
+    this.mesh.getPointSurroundingPoints(index, false, neighbourPoints);
+    
+    // Iterate over all the connected points and generate 
+    for (Size i = 0; i < neighbourPoints.size(); ++i)
+    {
+        Size neighbourIndex = neighbourPoints.get(i);
+//        Vec3 neighbourPointPosition = mesh.getPointPosition( neighbourIndex );
+  
+        // Structural Constraint
+        this.addStructuralConstraint(constraints, index, neighbourIndex);
+      
+        // Query the connected points of this neighbour
+        LocalL16UInt32Array neighbourNeighbourPoints;
+        this.mesh.getPointSurroundingPoints(neighbourIndex, true, neighbourNeighbourPoints);
+        
+        LocalL16UInt32Array tmpArray = arrayXor(neighbourPoints, neighbourNeighbourPoints);
+        
+        // Build the bend constraints
+        for(Index j = 0; j < tmpArray.size(); j++)
+        {
+          Size neighbourNeighbourIndex = tmpArray.get(j);
+          if(neighbourNeighbourIndex != index)
+          {
+            this.addBendConstraint(constraints, neighbourIndex, neighbourNeighbourIndex);
+          }
+        }
+    }
+}
+
+
+function SpringConstraint.init!(io ClothSimulation _sim)
+{
+	report("Init springs");
+
+	this.mesh = _sim.mesh;
+
+	// Iterate over all the mesh points and generate constraints (structural, shear, bending)
+    for(Size index = 0; index < _sim.mesh.pointCount(); index++)
+    {
+      this.setupConstraints(index, _sim.constraintDebug);
+    }
+}
+
+// function 
+// {
+//   Vec3 points[] = mesh.getAllPointPositions();
+
+//   // Initialize the constraint arrays
+//   for(Index i = 0; i < 8; ++i)
+//   {
+//     constraints[i] = Lines();
+//   }
+  
+//   if(idx > -1) {
+//     setupConstraints(mesh, idx, constraints, a, b, c);
+//   } else {
+//       // Iterate over all the mesh points and generate constraints (structural, shear, bending)
+//     for(Size index = 0; index < mesh.pointCount(); index++)
+//     {
+//       setupConstraints(mesh, index, constraints, a, b, c);
+//     }
+//   }
+  
+
+// }
 
 ///
 /// \brief SpringConstraints default ctor
@@ -41,33 +186,75 @@ function SpringConstraint(Float32 _s)
 	this.s = _s;
 }
 
+function SpringConstraint.satisfy(in Spring constraint, io Ref<Vec3Attribute> positions, in Ref<IntegerAttribute> movable)
+{
+	// ngl::Vec3 p1_to_p2 = p2->getPos()-p1->getPos(); // vector from p1 to p2
+	// float current_distance = p1_to_p2.length(); // current distance between p1 and p2
+	// ngl::Vec3 correctionVector = p1_to_p2*(1 - rest_distance/current_distance); // The offset vector that could moves p1 into a distance of rest_distance to p2
+	// ngl::Vec3 correctionVectorHalf = correctionVector*0.5; // Lets make it half that length, so that we can move BOTH p1 and p2.
+	// p1->offsetPos(correctionVectorHalf); // correctionVectorHalf is pointing from p1 to p2, so the length should move p1 half the length needed to satisfy the constraint.
+	// p2->offsetPos(-correctionVectorHalf); // we must move p2 the negative direction of correctionVectorHalf since it points from p2 to p1, and not p1 to p2.
+	Vec3 a = positions.values[constraint.p0];
+	Vec3 b = positions.values[constraint.p1];
+
+	Vec3 p1_to_p2 = b - a;
+	Float32 distance = p1_to_p2.length();
+	Vec3 correctionVector = p1_to_p2 * (1.0 - constraint.rest/distance );
+	Vec3 correctionVectorHalf = correctionVector * 0.5;
+
+	if(movable.values[constraint.p0])
+	{
+		a +=  correctionVectorHalf;
+		positions.values[constraint.p0] = a;
+	}
+
+	if(movable.values[constraint.p1])
+	{
+		b += -correctionVectorHalf;
+		positions.values[constraint.p1] = b;
+	}
+}
+
 /// \internal
 function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
 {
 	// adjust the amount of rows and columns.
-	Count adjRows = _rows;
-	Count adjCols = _cols;
-	if (adjRows < 1)  adjRows = 1;
-	if (adjCols < 1)  adjCols = 1;
-	Scalar width  = adjCols;
-	Scalar height = adjRows;
-	Float32 colWidth  = width  / adjCols;
-	Float32 rowHeight = height / adjRows;
+	// Count adjRows = _rows;
+	// Count adjCols = _cols;
+	// if (adjRows < 1)  adjRows = 1;
+	// if (adjCols < 1)  adjCols = 1;
+	// Scalar width  = adjCols;
+	// Scalar height = adjRows;
+	// Float32 colWidth  = width  / adjCols;
+	// Float32 rowHeight = height / adjRows;
 
 	Ref<Vec3Attribute> positions = attrs.getPositions();
 	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
 	Ref<IntegerAttribute> movable = attrs.getOrCreateIntegerAttribute('movable');
-	satisfyConstraints<<<positions.values.size()>>>(
-					positions.values,
-					velocities.values,
-					movable.values,
-					adjCols,
-					adjRows,
-					colWidth * colWidth,
-					rowHeight * rowHeight,
-					this.s
-					);
-	velocities.incrementVersion();
+	
+	for(Index j = 0; j < 15; j++)
+	{
+		// Process in serial for now
+		for(Index i = 0; i < this.structuralConstraints.size(); i++)
+		{
+			Spring constraint = this.structuralConstraints[i];
+			this.satisfy(constraint, positions, movable);;
+		}
+	}
+
+	// satisfyConstraints<<<positions.values.size()>>>(
+	// 				positions.values,
+	// 				velocities.values,
+	// 				movable.values,
+	// 				adjCols,
+	// 				adjRows,
+	// 				colWidth * colWidth,
+	// 				rowHeight * rowHeight,
+	// 				this.s
+	// 				);
+	
+	// velocities.incrementVersion();
+	positions.incrementVersion();
 }
 
 operator satisfyConstraints<<<index>>>(

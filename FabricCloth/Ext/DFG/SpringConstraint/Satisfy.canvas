@@ -1,0 +1,50 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: SpringConstraint\n  constraint: Spring\n  positions: Ref<Vec3Attribute>\n  movable: Ref<IntegerAttribute>\n"
+    },
+  "title" : "Satisfy",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "SpringConstraint"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "constraint",
+      "execPortType" : "In",
+      "typeSpec" : "Spring"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "positions",
+      "execPortType" : "IO",
+      "typeSpec" : "Vec3Attribute"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "movable",
+      "execPortType" : "In",
+      "typeSpec" : "IntegerAttribute"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "9092FF17EBC5803BE399E1FF32702C03",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  Ref<Vec3Attribute> positions_ref = positions;
+  Ref<IntegerAttribute> movable_ref = movable;
+  this.satisfy(constraint, positions_ref, movable_ref);
+}
+"
+  }

@@ -1,0 +1,54 @@
+// Created by kl2dfg (processDecomposeFunction)
+{
+  "objectType" : "Func",
+  "title" : "Spring ->",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Spring" : {
+          "p0" : 0,
+          "p1" : 0,
+          "rest" : 0
+          }
+        },
+      "name" : "value",
+      "execPortType" : "In",
+      "typeSpec" : "Spring"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "p0",
+      "execPortType" : "Out",
+      "typeSpec" : "Size"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "p1",
+      "execPortType" : "Out",
+      "typeSpec" : "Size"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "rest",
+      "execPortType" : "Out",
+      "typeSpec" : "Float32"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "42726A59DA400514A6EB33816635AD8F",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  p0 = value.p0;
+  p1 = value.p1;
+  rest = value.rest;
+}
+"
+  }

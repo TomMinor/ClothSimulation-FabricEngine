@@ -50,21 +50,46 @@ function VerletIntergrator.initialise!()
 function VerletIntergrator.apply!(io Ref<GeometryAttributes> attributes)
 {
 	Ref<Vec3Attribute> positions = attributes.getPositions();
+	Ref<Vec3Attribute> oldPositions = attributes.getOrCreateVec3Attribute('oldPositions');
 	Ref<Vec3Attribute> velocities = attributes.getOrCreateVec3Attribute('velocities');
+	Ref<IntegerAttribute> movable = attributes.getOrCreateIntegerAttribute('movable');
+	
 	integrate<<<positions.values.size()>>>(	positions.values,
+						oldPositions.values,
 						velocities.values,
+						movable.values,
 						this.rate
 						);
+
 	positions.incrementVersion();
+	oldPositions.incrementVersion();
 	velocities.incrementVersion();
 }
 
 operator integrate<<<index>>>(
   io Vec3 positions[],
+  io Vec3 oldPositions[],
   io Vec3 velocities[],
+  io Integer movable[],
   Float32 rate
   )
 {
-  positions[index] += rate * velocities[index];
-  velocities[index] *= 0.99;
+	Float32 damping = 0.7; //@todo make constant somewhere
+	Float32 TIME_STEPSIZE2 = 0.5 * 0.5;
+
+	// Note: velocities are actually acceleration, gotta rename it
+	if( movable[index] )
+	{
+		Vec3 pos = positions[index];
+		Vec3 oldPos = oldPositions[index];
+		Vec3 tmp = pos;
+		pos += (pos - oldPos) * (1.0 - damping) + velocities[index]*TIME_STEPSIZE2;
+		oldPos = tmp;
+
+		positions[index] = pos;
+		oldPositions[index] = oldPos;
+		velocities[index] = Vec3(0.0, 0.0, 0.0);
+	}
+  // positions[index] += rate * velocities[index];
+  // velocities[index] *= 0.99;
 }

@@ -1,0 +1,31 @@
+// Created by kl2dfg (processStructConstant)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiAlwaysShowDaisyChainPorts" : "true"
+    },
+  "title" : "Spring",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Spring" : {
+          "p0" : 0,
+          "p1" : 0,
+          "rest" : 0
+          }
+        },
+      "name" : "value",
+      "execPortType" : "In",
+      "typeSpec" : "Spring"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "8D6D3A454A05D210CC9A3AE266EE45A7",
+  "code" : "dfgEntry {
+}
+"
+  }

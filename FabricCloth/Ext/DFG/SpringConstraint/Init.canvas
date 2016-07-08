@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: SpringConstraint\n  _sim: ClothSimulation\n"
+    },
+  "title" : "Init",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "SpringConstraint"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "sim",
+      "execPortType" : "IO",
+      "typeSpec" : "ClothSimulation"
+      }
+    ],
+  "extDeps" : {
+    "ClothSimulation" : "*"
+    },
+  "presetGUID" : "F15481D837ECCAF881799E9245D44AE3",
+  "code" : "require ClothSimulation;
+
+dfgEntry {
+  this.init(sim);
+}
+"
+  }
