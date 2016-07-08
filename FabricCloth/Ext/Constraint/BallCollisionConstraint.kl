@@ -39,7 +39,7 @@ function BallCollisionConstraint(in Vec3 _position, Float32 _radius)
 }
 
 /// \internal
-function BallCollisionConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
+function BallCollisionConstraint.solve!(io Ref<GeometryAttributes> attrs)
 {
 	Ref<Vec3Attribute> positions = attrs.getPositions();
 	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');

@@ -74,8 +74,8 @@ operator integrate<<<index>>>(
   Float32 rate
   )
 {
-	Float32 damping = 0.7; //@todo make constant somewhere
-	Float32 TIME_STEPSIZE2 = 0.5 * 0.5;
+	Float32 damping = 0.9; //@todo make constant somewhere
+	Float32 TIME_STEPSIZE2 = 0.5 * 0.5; //@todo this should definitely be global/passed in
 
 	// Note: velocities are actually acceleration, gotta rename it
 	if( movable[index] )
@@ -90,6 +90,4 @@ operator integrate<<<index>>>(
 		oldPositions[index] = oldPos;
 		velocities[index] = Vec3(0.0, 0.0, 0.0);
 	}
-  // positions[index] += rate * velocities[index];
-  // velocities[index] *= 0.99;
 }

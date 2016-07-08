@@ -83,7 +83,7 @@ private function SpringConstraint.addStructuralConstraint!(io Lines constraints[
 
 private function SpringConstraint.addBendConstraint!(io Lines constraints[8], in Size a, in Size b)
 {
-	Vec3 visualisationOffset = Vec3(0, 0.9, 0);
+	Vec3 visualisationOffset = Vec3(0, 0.2, 0);
 	Vec3 posA = this.mesh.getPointPosition(a);
 	Vec3 posB = this.mesh.getPointPosition(b);
 
@@ -145,29 +145,6 @@ function SpringConstraint.init!(io ClothSimulation _sim)
     }
 }
 
-// function 
-// {
-//   Vec3 points[] = mesh.getAllPointPositions();
-
-//   // Initialize the constraint arrays
-//   for(Index i = 0; i < 8; ++i)
-//   {
-//     constraints[i] = Lines();
-//   }
-  
-//   if(idx > -1) {
-//     setupConstraints(mesh, idx, constraints, a, b, c);
-//   } else {
-//       // Iterate over all the mesh points and generate constraints (structural, shear, bending)
-//     for(Size index = 0; index < mesh.pointCount(); index++)
-//     {
-//       setupConstraints(mesh, index, constraints, a, b, c);
-//     }
-//   }
-  
-
-// }
-
 ///
 /// \brief SpringConstraints default ctor
 /// \dfgPresetFolder Constraints
@@ -216,23 +193,13 @@ function SpringConstraint.satisfy(in Spring constraint, io Ref<Vec3Attribute> po
 }
 
 /// \internal
-function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows, UInt32 _cols)
+function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs)
 {
-	// adjust the amount of rows and columns.
-	// Count adjRows = _rows;
-	// Count adjCols = _cols;
-	// if (adjRows < 1)  adjRows = 1;
-	// if (adjCols < 1)  adjCols = 1;
-	// Scalar width  = adjCols;
-	// Scalar height = adjRows;
-	// Float32 colWidth  = width  / adjCols;
-	// Float32 rowHeight = height / adjRows;
-
 	Ref<Vec3Attribute> positions = attrs.getPositions();
 	Ref<Vec3Attribute> velocities = attrs.getOrCreateVec3Attribute('velocities');
 	Ref<IntegerAttribute> movable = attrs.getOrCreateIntegerAttribute('movable');
 	
-	for(Index j = 0; j < 15; j++)
+	for(Index j = 0; j < 7; j++)
 	{
 		// Process in serial for now
 		for(Index i = 0; i < this.structuralConstraints.size(); i++)
@@ -242,68 +209,6 @@ function SpringConstraint.solve!(io Ref<GeometryAttributes> attrs, UInt32 _rows,
 		}
 	}
 
-	// satisfyConstraints<<<positions.values.size()>>>(
-	// 				positions.values,
-	// 				velocities.values,
-	// 				movable.values,
-	// 				adjCols,
-	// 				adjRows,
-	// 				colWidth * colWidth,
-	// 				rowHeight * rowHeight,
-	// 				this.s
-	// 				);
-	
-	// velocities.incrementVersion();
+	velocities.incrementVersion();
 	positions.incrementVersion();
-}
-
-operator satisfyConstraints<<<index>>>(
-  Vec3 positions[],
-  io Vec3 velocities[],
-  Integer movable[],
-  // hard coded grid shape for now, modified this from a canvas sample
-  UInt32 cols,
-  UInt32 rows,
-  Float32 colWidthSq,
-  Float32 rowHeightSq,
-  Float32 s
-  )
-{
-	UInt32 row = index / (cols + 1);
-	UInt32 col = index % (cols + 1);
-
-	if ( !movable[index] )
-	{
-		if ( row > 0 )
-		{
-			Vec3 delta = positions[(row - 1) * (cols + 1) + col] - positions[index];
-			Float32 deltaLenSq = delta.lengthSquared();
-			Float32 diff = (deltaLenSq - rowHeightSq) / (rowHeightSq + deltaLenSq) * s;
-			velocities[index] += delta * diff;
-		}
-
-		if ( row < rows )
-		{
-			Vec3 delta = positions[(row + 1) * (cols + 1) + col] - positions[index];
-			Float32 deltaLenSq = delta.lengthSquared();
-			Float32 diff = (deltaLenSq - rowHeightSq) / (rowHeightSq + deltaLenSq) * s;
-			velocities[index] += delta * diff;
-		}
-
-		if ( col > 0 )
-		{
-			Vec3 delta = positions[row * (cols + 1) + col - 1] - positions[index];
-			Float32 deltaLenSq = delta.lengthSquared();
-			Float32 diff = (deltaLenSq - colWidthSq) / (colWidthSq + deltaLenSq) * s;
-			velocities[index] += delta * diff;
-		}
-
-		if ( col < cols )
-		{
-			Vec3 delta = positions[row * (cols + 1) + col + 1] - positions[index];
-			Float32 deltaLenSq = delta.lengthSquared();
-			Float32 diff = (deltaLenSq - colWidthSq) / (colWidthSq + deltaLenSq) * s;
-			velocities[index] += delta * diff;
-		}
-	}
 }
