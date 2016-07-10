@@ -5,11 +5,11 @@ My first attempt at doing cool stuff in Fabric, had a lot planned for this but e
 Only tested in Fabric Engine 2.1.0.
 
 ### Future Improvements
-* Proper constraint setup based on topology
+* Make the constraint solving use a parallel method
 * Better integration technique
 * Make use of the manipulator tools to paint on fixed vertices and such
 
-Watch the demo video here : https://vimeo.com/166024346
+Watch the demo video here : https://vimeo.com/174006149
 
 ![Viewport Result](images/clothviewport.png)
 
