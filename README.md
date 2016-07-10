@@ -5,7 +5,7 @@ My first attempt at doing cool stuff in Fabric, had a lot planned for this but e
 Only tested in Fabric Engine 2.1.0.
 
 ### Future Improvements
-* Make the constraint solving use a parallel method
+* Use a parallel method for solving constraints
 * Better integration technique
 * Make use of the manipulator tools to paint on fixed vertices and such
 
